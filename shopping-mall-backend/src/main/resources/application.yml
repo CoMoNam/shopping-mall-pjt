@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: delivery-service
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/delivery_service
+    username: mysqluser
+    password: Mysql@3306
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop                    # DDL 자동 설정 (create, update, validate, none)
+    show-sql: true                             # 실행되는 SQL을 출력
+    properties:
+      hibernate:
+        format_sql: true                       # SQL을 보기 좋게 포맷
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+jwt:
+  secret-key: "Abc123!@#"
+  expiration-time: 86400000 # 1일 동안 유효
