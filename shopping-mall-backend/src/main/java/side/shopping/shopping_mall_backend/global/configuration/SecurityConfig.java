@@ -17,7 +17,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/users/member/join").permitAll() // 회원가입은 인증 없이 허용
+                        .requestMatchers("/api/member/join").permitAll() // 회원가입은 인증 없이 허용
                         .anyRequest().authenticated() // 나머지 요청은 인증 필요
                 )
                 .csrf(AbstractHttpConfigurer::disable); // CSRF 비활성화

@@ -28,11 +28,19 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-validation") // 유효성검증
+	implementation ("org.mapstruct:mapstruct:1.5.5.Final")
+
 	compileOnly("org.projectlombok:lombok")
+
 	runtimeOnly("com.mysql:mysql-connector-j")
+
 	annotationProcessor("org.projectlombok:lombok")
+	annotationProcessor ("org.mapstruct:mapstruct-processor:1.5.5.Final") // MapStruct 프로세서
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

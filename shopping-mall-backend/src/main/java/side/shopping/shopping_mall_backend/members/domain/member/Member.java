@@ -1,4 +1,4 @@
-package side.shopping.shopping_mall_backend.users.domain.member;
+package side.shopping.shopping_mall_backend.members.domain.member;
 
 import jakarta.persistence.*;
 import lombok.*;
