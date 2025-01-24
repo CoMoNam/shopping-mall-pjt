@@ -1,3 +1,7 @@
+"use client";
+
+import "../globals.css";
+
 import React from "react";
 import {
   Box,
@@ -7,12 +11,11 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { FaGoogle } from "react-icons/fa"; // 구글 아이콘
-import { SiKakao } from "react-icons/si"; // 카카오 아이콘
-import "../globals.css"; // 스타일 시트 임포트
+import { FaGoogle } from "react-icons/fa";
+import { SiKakao } from "react-icons/si";
 import Link from "next/link";
 
-export default function Login() {
+const Login = () => {
   return (
     <Container maxWidth="sm" sx={{ paddingY: 15 }}>
       <Paper
@@ -45,17 +48,18 @@ export default function Login() {
             label="비밀번호"
             type="password"
             variant="outlined"
-            className="textField" // CSS 클래스 적용
+            className="textField"
             InputLabelProps={{
-              shrink: true, // 레이블을 항상 축소된 상태로 유지
+              shrink: true,
             }}
           />
+
           <Button
-            variant="contained" // contained로 변경
+            variant="contained"
             size="large"
             sx={{
               marginTop: 2,
-              backgroundColor: "#000000", // 구글 버튼과 동일한 파란색
+              backgroundColor: "#000000",
               color: "white",
               "&:hover": {
                 backgroundColor: "#1a1a1a", // hover 시 색상 변경
@@ -167,4 +171,6 @@ export default function Login() {
       </Paper>
     </Container>
   );
-}
+};
+
+export default Login;
