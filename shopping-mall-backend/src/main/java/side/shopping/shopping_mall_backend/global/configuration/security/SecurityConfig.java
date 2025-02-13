@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,7 +24,7 @@ import side.shopping.shopping_mall_backend.members.application.service.security.
 @EnableWebSecurity
 //메서드 수준에서의 보안 처리 활성화
 //@Secure, @PreAuthorize 어노테이션 사용 가능
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @AllArgsConstructor
 public class SecurityConfig {
 
@@ -32,8 +33,7 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler accessDeniedHandler;
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
 
-    private static final String[] AUTH_WHITELIST = {"/member/login", "/member/signup",
-            "/swagger-ui/**", "/api-docs", "swagger-ui-custom.html"};
+    private static final String[] AUTH_WHITELIST = {"/api/members/join", "/api/members/login"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

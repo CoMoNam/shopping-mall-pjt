@@ -4,7 +4,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/delivery_service
+    url: jdbc:mysql://localhost:3306/shopping_mall
     username: mysqluser
     password: Mysql@3306
 

@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
-import side.shopping.shopping_mall_backend.global.enums.logs.ErrorComment;
+import side.shopping.shopping_mall_backend.global.enums.logs.Comments;
 import side.shopping.shopping_mall_backend.global.exception.dto.ErrorResponseDto;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(final HttpServletRequest request, final HttpServletResponse response,
                        final AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        log.error(ErrorComment.UNAUTHORIZED.getDescriptionEn(), accessDeniedException);
+        log.error(Comments.UNAUTHORIZED.getDescriptionEn(), accessDeniedException);
 
         ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.FORBIDDEN.value(),
                 accessDeniedException.getMessage(),

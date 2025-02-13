@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import side.shopping.shopping_mall_backend.global.enums.logs.Comments;
+import side.shopping.shopping_mall_backend.members.application.dto.member.LoginRequestDto;
 import side.shopping.shopping_mall_backend.members.application.dto.member.MemberDto;
 import side.shopping.shopping_mall_backend.members.application.service.member.MemberService;
 
@@ -21,7 +23,11 @@ public class MemberController {
     @PostMapping("/join")
     public ResponseEntity<String> join(@Valid @RequestBody MemberDto memberDto) {
         memberService.join(memberDto);
-        return ResponseEntity.ok("MEMBER JOINED SUCCESSFULLY");
+        return ResponseEntity.ok(Comments.MEMBER_JOIN_SUCCESS.getDescriptionEn());
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDto loginRequestDto) {
+        return ResponseEntity.ok(memberService.login(loginRequestDto));
+    }
 }
