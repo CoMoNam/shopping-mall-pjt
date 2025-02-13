@@ -2,8 +2,8 @@ package side.shopping.shopping_mall_backend.members.domain.member;
 
 import jakarta.persistence.*;
 import lombok.*;
-import side.shopping.shopping_mall_backend.global.domain.Auditable;
-import side.shopping.shopping_mall_backend.global.enums.MemberType;
+import side.shopping.shopping_mall_backend.global.domain.jpa.Auditable;
+import side.shopping.shopping_mall_backend.global.enums.member.Role;
 
 @Entity
 @NoArgsConstructor // 기본 생성자를 생성
@@ -38,12 +38,12 @@ public class Member extends Auditable {
     private String addressMore;
 
     @Column(nullable = false)
-    private MemberType memberType;
+    private Role role;
 
     @PrePersist
     public void prePersistUserType() {
-        if (memberType == null) {
-            memberType = MemberType.REGULAR_USER;
+        if (role == null) {
+            role = Role.USER;
         }
     }
 }

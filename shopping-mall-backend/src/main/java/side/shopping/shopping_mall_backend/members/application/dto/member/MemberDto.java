@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import side.shopping.shopping_mall_backend.global.enums.MemberType;
+import side.shopping.shopping_mall_backend.global.enums.member.Role;
 
 @ToString
 @Getter
@@ -42,5 +42,5 @@ public class MemberDto {
     private String addressMore;
 
     @Enumerated(EnumType.STRING)
-    private MemberType memberType;
+    private Role role;
 }

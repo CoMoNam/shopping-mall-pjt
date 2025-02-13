@@ -1,4 +1,4 @@
-package side.shopping.shopping_mall_backend.global.domain;
+package side.shopping.shopping_mall_backend.global.domain.jpa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

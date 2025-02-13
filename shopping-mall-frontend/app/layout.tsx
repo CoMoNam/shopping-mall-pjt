@@ -6,6 +6,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "SIDEMALL",
   description: "모든 상품판매를 담당하는 사이트 프로젝트",
+  icons: {
+    icon: "/sidemall-favicon.ico", // favicon 경로
+  },
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

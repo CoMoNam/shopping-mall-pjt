@@ -1,4 +1,4 @@
-package side.shopping.shopping_mall_backend.global.configuration;
+package side.shopping.shopping_mall_backend.global.configuration.security;
 
 import lombok.Getter;
 import lombok.Setter;

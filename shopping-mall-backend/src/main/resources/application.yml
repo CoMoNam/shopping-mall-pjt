@@ -18,5 +18,5 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 jwt:
-  secret-key: "Abc123!@#"
+  secret-key: "c3RhY2t5c3RyYW5nZ2VvZnJlZW5rZXl0aGVyZXNlY3JldGVzYXJvd3Bpb25sb3diYXNlZGtleQ"
   expiration-time: 86400000 # 1일 동안 유효

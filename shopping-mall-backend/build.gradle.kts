@@ -30,6 +30,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation") // 유효성검증
 	implementation ("org.mapstruct:mapstruct:1.5.5.Final")
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+	implementation("org.modelmapper:modelmapper:3.1.1")
 
 	compileOnly("org.projectlombok:lombok")
 
