@@ -1,14 +1,14 @@
-package side.shopping.shopping_mall_backend.global.configuration.security;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class ModelMapperConfig {
-
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
-}
+//package side.shopping.shopping_mall_backend.global.configuration.security;
+//
+//import org.modelmapper.ModelMapper;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//
+//@Configuration
+//public class ModelMapperConfig {
+//
+//    @Bean
+//    public ModelMapper modelMapper() {
+//        return new ModelMapper();
+//    }
+//}

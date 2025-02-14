@@ -21,7 +21,7 @@ const Join = () => {
   // 상태 관리: 전체 동의, 개별 항목의 동의 상태
   const [allAgree, setAllAgree] = useState(false);
   const [agreements, setAgreements] = useState({
-    over14: false,
+    overAge: false,
     termsOfService: false,
     privacyPolicy: false,
     marketingConsent: false,
@@ -38,7 +38,7 @@ const Join = () => {
     const checked = event.target.checked;
     setAllAgree(checked);
     setAgreements({
-      over14: checked,
+      overAge: checked,
       termsOfService: checked,
       privacyPolicy: checked,
       marketingConsent: checked,
@@ -202,7 +202,7 @@ const Join = () => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={agreements.over14}
+                    checked={agreements.overAge}
                     onChange={handleAgreementChange}
                     name="over14"
                     sx={{

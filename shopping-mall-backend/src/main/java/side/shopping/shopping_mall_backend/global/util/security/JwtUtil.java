@@ -32,7 +32,6 @@ public class JwtUtil {
     /**
      * Access Token 생성
      *
-     * @param customUserInfoDto
      * @return Access Token String
      */
     public String createAccessToken(CustomUserInfoDto customUserInfoDto) {
@@ -41,8 +40,7 @@ public class JwtUtil {
 
     /**
      * JWT 생성
-     * @ param member
-     * @param expireTime
+     *
      * @return JWT String
      */
     private String createToken(CustomUserInfoDto customUserInfoDto, long expireTime) {
@@ -57,6 +55,7 @@ public class JwtUtil {
 
         return Jwts.builder()
                 .setClaims(claims)
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setIssuedAt(Date.from(now.toInstant()))
                 .setExpiration(Date.from(tokenValidity.toInstant()))
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -66,7 +65,6 @@ public class JwtUtil {
     /**
      * Token에서 User ID 추출
      *
-     * @param token
      * @return User ID
      */
     public Long getUserId(String token) {
@@ -75,7 +73,7 @@ public class JwtUtil {
 
     /**
      * JWT 검증
-     * @param token
+     *
      * @return IsValidate
      */
     public boolean isValidToken(String token) {
@@ -96,7 +94,7 @@ public class JwtUtil {
 
     /**
      * JWT Claims 추출
-     * @param accessToken
+     *
      * @return JWT Claims
      */
     public Claims parseClaims(String accessToken) {

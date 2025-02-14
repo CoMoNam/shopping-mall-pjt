@@ -3,10 +3,12 @@ package side.shopping.shopping_mall_backend.members.application.dto.member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import side.shopping.shopping_mall_backend.global.enums.member.Role;
 import side.shopping.shopping_mall_backend.members.domain.member.Member;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomUserInfoDto {
@@ -19,8 +21,8 @@ public class CustomUserInfoDto {
 
     public CustomUserInfoDto(Member member) {
         this.id = member.getId();
+        this.email = member.getEmail();
         this.nickname = member.getUsername();
         this.role = member.getRole();
-        this.password = member.getPassword();
     }
 }

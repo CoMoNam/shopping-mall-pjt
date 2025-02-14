@@ -25,7 +25,6 @@ public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-    private final ModelMapper modelMapper;
 
     @Override
     public void join(MemberDto memberDto) {
@@ -58,7 +57,7 @@ public class MemberServiceImpl implements MemberService{
             throw new BadCredentialsException(Comments.NOT_MATCHED_PASSWORD.getDescriptionEn());
         }
 
-        CustomUserInfoDto customUserInfoDto = modelMapper.map(optionalMember.get(), CustomUserInfoDto.class);
+        CustomUserInfoDto customUserInfoDto = MemberMapper.INSTANCE.toCustomUserInfoDto(optionalMember.get());
 
         return jwtUtil.createAccessToken(customUserInfoDto);
     }
