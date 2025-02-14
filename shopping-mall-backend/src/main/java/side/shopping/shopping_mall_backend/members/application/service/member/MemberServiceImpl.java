@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import side.shopping.shopping_mall_backend.global.enums.logs.Comments;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
 import side.shopping.shopping_mall_backend.members.application.dto.member.CustomUserInfoDto;
+import side.shopping.shopping_mall_backend.members.application.dto.member.JoinRequestDto;
 import side.shopping.shopping_mall_backend.members.application.dto.member.LoginRequestDto;
 import side.shopping.shopping_mall_backend.members.application.dto.member.MemberDto;
 import side.shopping.shopping_mall_backend.members.application.mapper.member.MemberMapper;
@@ -27,8 +28,8 @@ public class MemberServiceImpl implements MemberService{
     private final JwtUtil jwtUtil;
 
     @Override
-    public void join(MemberDto memberDto) {
-        Member member = MemberMapper.INSTANCE.toMember(memberDto);
+    public void join(JoinRequestDto joinRequestDto) {
+        Member member = MemberMapper.INSTANCE.toMember(joinRequestDto);
 
         // email 중복 확인
         if (isEmailDuplicate(member.getEmail())) {
@@ -40,7 +41,7 @@ public class MemberServiceImpl implements MemberService{
             throw new IllegalArgumentException(Comments.NICKNAME_DUPLICATED.getDescriptionEn());
         }
 
-        member.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+        member.setPassword(passwordEncoder.encode(joinRequestDto.getPassword()));
 
         memberRepository.save(member);
     }

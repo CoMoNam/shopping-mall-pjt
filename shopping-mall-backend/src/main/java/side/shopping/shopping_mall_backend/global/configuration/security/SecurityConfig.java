@@ -20,6 +20,8 @@ import side.shopping.shopping_mall_backend.global.handler.security.CustomAccessD
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
 import side.shopping.shopping_mall_backend.members.application.service.security.CustomUserDetailsService;
 
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 //메서드 수준에서의 보안 처리 활성화
@@ -38,8 +40,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //CSRF, CORS
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.cors((Customizer.withDefaults()));
+        http.csrf(AbstractHttpConfigurer::disable)
+//        http.cors((Customizer.withDefaults()));
+            .cors(cors -> cors.configurationSource(request -> {
+                var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+                corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+                corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+                corsConfiguration.setAllowedHeaders(List.of("*"));
+                corsConfiguration.setAllowCredentials(true);
+                return corsConfiguration;
+            }));
 
         //세션 관리 상태 없음으로 구성, Spring Security가 세션 생성 or 사용 x
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(
