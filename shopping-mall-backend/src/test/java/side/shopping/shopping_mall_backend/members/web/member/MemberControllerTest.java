@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import side.shopping.shopping_mall_backend.global.enums.api.EndPoint;
 import side.shopping.shopping_mall_backend.global.enums.logs.Comments;
 import side.shopping.shopping_mall_backend.members.application.dto.member.JoinRequestDto;
-import side.shopping.shopping_mall_backend.members.application.dto.member.MemberDto;
 import side.shopping.shopping_mall_backend.members.domain.member.Member;
 import side.shopping.shopping_mall_backend.members.infrastructure.persistence.member.MemberRepository;
 import side.shopping.shopping_mall_backend.util.TestDataUtil;
@@ -41,7 +40,7 @@ class MemberControllerTest {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    @DisplayName("여러 회원 및 단일회원을 저장하고 조회 테스트")
+    @DisplayName("여러 테스트 회원 및 테스트 단일회원을 저장하고 조회 테스트")
     void testMultipleMembers() {
         JoinRequestDto joinRequestDto = TestDataUtil.createMember();
         assertNotNull(joinRequestDto);
@@ -67,10 +66,10 @@ class MemberControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(Comments.MEMBER_JOIN_SUCCESS.getDescriptionEn()));
 
-        //실제 DB에서 회원 데이터 확인
+        //가입 후 실제 DB에서 회원 데이터 확인
         Optional<Member> member = memberRepository.findByNickname(joinRequestDto.getNickname());
 
-        // DB에 삽입된 데이터 확인 -> 추가적으로 확인
+        //DB에 삽입된 데이터 확인 -> 추가적으로 확인
         member.ifPresent(value -> assertThat(value.getEmail()).isEqualTo(joinRequestDto.getEmail()));
     }
 
