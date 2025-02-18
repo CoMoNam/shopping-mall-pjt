@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import side.shopping.shopping_mall_backend.members.application.dto.member.CustomUserInfoDto;
+import side.shopping.shopping_mall_backend.customer.application.dto.member.CustomUserInfoDto;
 
 import java.util.ArrayList;
 import java.util.Collection;

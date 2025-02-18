@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import side.shopping.shopping_mall_backend.global.enums.security.TokenStatus;
-import side.shopping.shopping_mall_backend.members.application.dto.member.CustomUserInfoDto;
+import side.shopping.shopping_mall_backend.customer.application.dto.member.CustomUserInfoDto;
 
 import java.security.Key;
 import java.time.ZonedDateTime;
