@@ -6,6 +6,7 @@ side-project shopping-mall
 # 환경
 - Springboot framework
 - JDK 21 version
+- Mysql 8
 
 # 기능 (계속 업데이트 진행)
 - Login (Spring Security Jwt Token)
