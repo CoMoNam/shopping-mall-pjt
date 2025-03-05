@@ -5,11 +5,16 @@ side-project shopping-mall
 
 ROLE - 일반 사용자, 판매자, 관리자, 슈퍼계정
 
-# 환경
+# Backend 환경
 - Springboot framework
 - JDK 21 version
 - Mysql 8
 - Docker 설치 (Mysql, Solr, Redis, ElasticSearch, Kibana, Logstash)
+- 
+# Frontend 환경
+- Next.js
+- Typescript
+- Npm
 
 # 기능 (계속 업데이트 진행)
 - 회원가입 / Login (Spring Security Jwt Token)
