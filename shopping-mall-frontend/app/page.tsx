@@ -1,6 +1,6 @@
-import Category from "./ui/Category";
-import IntegrationSearchBar from "./ui/IntegrationSearchBar";
-import RecentProducts from "./ui/RecentProducts";
+import Category from "../components/Category";
+import IntegrationSearchBar from "../components/IntegrationSearchBar";
+import RecentProducts from "../components/RecentProducts";
 
 const Home = () => {
   return (

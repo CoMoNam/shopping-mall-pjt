@@ -1,0 +1,57 @@
+services:
+  # <<< mysql db 컨테이너 >>>
+  db:
+    image: mysql:8.0
+    container_name: sm-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Root12345!@
+      MYSQL_DATABASE: SMDB
+      MYSQL_USER: smuser
+      MYSQL_PASSWORD: User12345!@
+    ports:
+      - "3304:3306"
+  # 호스트에서 3304 로 접근 -> 컨테이너 내부의 3306 포트로 전달
+
+  # <<< redis 세션 >>>
+  redis:
+    image: redis
+    container_name: sm-redis
+    ports:
+      - "6379:6379"
+
+  # <<< elk 검색 엔진 >>>
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.1
+    container_name: sm-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.5.1
+    container_name: sm-kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.5.1
+    container_name: sm-logstash
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+
+  # <<< solr 검색 엔진 >>>
+  #  solr:
+  #    image: solr:latest
+  #    container_name: sm-solr
+  #    ports:
+  #      - "8983:8983"
+  #    volumes:
+  #      - ./solr_data:/opt/solr/server/solr/mycore/data  # Solr 데이터를 저장할 볼륨 마운트

@@ -1,6 +1,6 @@
 "use client";
 
-import "../globals.css";
+import "../../styles/globals.css";
 
 import {
   Box,
@@ -27,11 +27,6 @@ const Join = () => {
     marketingConsent: false,
     notifications: false,
   });
-  // 상태 관리: 비밀번호 관리
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-  const [passwordHelperText, setPasswordHelperText] = useState("");
 
   // 전체 동의/선택 관리
   const handleAllAgreeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +40,12 @@ const Join = () => {
       notifications: checked,
     });
   };
+
+  // 상태 관리: 비밀번호 관리
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordHelperText, setPasswordHelperText] = useState("");
 
   // 개별 항목 동의 관리
   const handleAgreementChange = (
@@ -73,6 +74,9 @@ const Join = () => {
       setPasswordHelperText("");
     }
   };
+
+  console.log("======>> 입력된정보::: ======>>");
+  console.log();
 
   return (
     <Container maxWidth="sm" sx={{ paddingY: 15 }}>
@@ -149,7 +153,7 @@ const Join = () => {
             }}
           />
           <TextField
-            label="메인주소"
+            label="주소"
             type="text"
             variant="outlined"
             className="textField"

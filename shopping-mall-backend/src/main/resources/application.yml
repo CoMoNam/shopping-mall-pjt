@@ -3,10 +3,14 @@ spring:
     name: delivery-service
 
   datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/shopping_mall
+#    username: mysqluser
+#    password: Mysql@3306
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/shopping_mall
-    username: mysqluser
-    password: Mysql@3306
+    url: jdbc:mysql://localhost:3304/SMDB
+    username: smuser
+    password: User12345!@
 
   jpa:
     hibernate:

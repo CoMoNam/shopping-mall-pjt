@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
-import side.shopping.shopping_mall_backend.global.enums.logs.Comments;
+import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.exception.dto.ErrorResponseDto;
 
 import java.io.IOException;

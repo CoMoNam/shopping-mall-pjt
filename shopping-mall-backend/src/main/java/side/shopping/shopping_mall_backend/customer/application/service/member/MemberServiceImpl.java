@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import side.shopping.shopping_mall_backend.global.enums.logs.Comments;
+import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
 import side.shopping.shopping_mall_backend.customer.application.dto.member.CustomUserInfoDto;
 import side.shopping.shopping_mall_backend.customer.application.dto.member.JoinRequestDto;
@@ -31,12 +31,12 @@ public class MemberServiceImpl implements MemberService{
 
         // email 중복 확인
         if (isEmailDuplicate(member.getEmail())) {
-            throw new IllegalArgumentException(Comments.EMAIL_DUPLICATED.getDescriptionEn());
+            throw new IllegalArgumentException(Comments.IS_DUPLICATED.getDescriptionEn());
         }
 
         // nickname 중복 확인
         if (isNicknameDuplicate(member.getEmail())) {
-            throw new IllegalArgumentException(Comments.NICKNAME_DUPLICATED.getDescriptionEn());
+            throw new IllegalArgumentException(Comments.IS_DUPLICATED.getDescriptionEn());
         }
 
         member.setPassword(passwordEncoder.encode(joinRequestDto.getPassword()));
@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService{
         Optional<Member> optionalMember = memberRepository.findByEmail(loginRequestDto.getEmail());
 
         if (optionalMember.isEmpty()) {
-            throw new UsernameNotFoundException(Comments.NOT_EXIST_EMAIL.getDescriptionEn());
+            throw new UsernameNotFoundException(Comments.NOT_EXIST.getDescriptionEn());
         }
 
         if (!passwordEncoder.matches(loginRequestDto.getPassword(), optionalMember.get().getPassword())) {

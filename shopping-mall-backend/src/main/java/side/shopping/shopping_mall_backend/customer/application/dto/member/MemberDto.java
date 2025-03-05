@@ -5,7 +5,7 @@ import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import side.shopping.shopping_mall_backend.global.enums.member.Role;
+import side.shopping.shopping_mall_backend.global.enums.Role;
 
 @ToString
 @Getter

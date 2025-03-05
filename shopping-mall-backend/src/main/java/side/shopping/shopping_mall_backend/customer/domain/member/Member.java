@@ -3,7 +3,7 @@ package side.shopping.shopping_mall_backend.customer.domain.member;
 import jakarta.persistence.*;
 import lombok.*;
 import side.shopping.shopping_mall_backend.global.domain.jpa.Auditable;
-import side.shopping.shopping_mall_backend.global.enums.member.Role;
+import side.shopping.shopping_mall_backend.global.enums.Role;
 
 @Entity
 @NoArgsConstructor // 기본 생성자를 생성
@@ -35,6 +35,12 @@ public class Member extends Auditable {
 
     @Column(nullable = false)
     private Role role;
+
+    private boolean overAge;
+    private boolean termsOfService;
+    private boolean privacyPolicy;
+    private boolean marketingConsent;
+    private boolean notifications;
 
     @PrePersist
     public void prePersistUserType() {

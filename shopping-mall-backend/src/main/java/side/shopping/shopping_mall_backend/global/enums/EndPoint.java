@@ -1,4 +1,4 @@
-package side.shopping.shopping_mall_backend.global.enums.api;
+package side.shopping.shopping_mall_backend.global.enums;
 
 public class EndPoint {
     public static final String MEMBER_CONTROLLER = "/api/member";

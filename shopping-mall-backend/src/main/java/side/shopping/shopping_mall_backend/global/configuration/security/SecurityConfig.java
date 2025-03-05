@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import side.shopping.shopping_mall_backend.global.entrypoint.security.CustomAuthenticationEntryPoint;
+import side.shopping.shopping_mall_backend.global.enums.EndPoint;
 import side.shopping.shopping_mall_backend.global.filter.security.JwtAuthFilter;
 import side.shopping.shopping_mall_backend.global.handler.security.CustomAccessDeniedHandler;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
@@ -31,7 +32,7 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler accessDeniedHandler;
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
 
-    private static final String[] AUTH_WHITELIST = {"/api/members/join", "/api/members/login"};
+    private static final String[] AUTH_WHITELIST = {EndPoint.MEMBER_CONTROLLER + "/join", EndPoint.MEMBER_CONTROLLER + "/login"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

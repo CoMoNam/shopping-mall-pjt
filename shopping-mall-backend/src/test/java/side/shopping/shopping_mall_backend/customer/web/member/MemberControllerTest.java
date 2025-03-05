@@ -10,9 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
-import side.shopping.shopping_mall_backend.global.enums.api.EndPoint;
-import side.shopping.shopping_mall_backend.global.enums.logs.Comments;
-import side.shopping.shopping_mall_backend.global.enums.member.Role;
+import side.shopping.shopping_mall_backend.global.enums.EndPoint;
+import side.shopping.shopping_mall_backend.global.enums.Comments;
+import side.shopping.shopping_mall_backend.global.enums.Role;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
 import side.shopping.shopping_mall_backend.customer.application.dto.member.JoinRequestDto;
 import side.shopping.shopping_mall_backend.customer.application.dto.member.LoginRequestDto;
@@ -69,7 +69,7 @@ class MemberControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest))
                 .andExpect(status().isOk())
-                .andExpect(content().string(Comments.MEMBER_JOIN_SUCCESS.getDescriptionEn()));
+                .andExpect(content().string(Comments.TRANSACTION_SUCCESS.getDescriptionEn()));
 
         //가입 후 실제 DB에서 회원 데이터 확인
         Optional<Member> member = memberRepository.findByNickname(joinRequestDto.getNickname());

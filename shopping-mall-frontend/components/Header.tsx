@@ -1,5 +1,5 @@
 "use client";
-import "../globals.css";
+import "../styles/globals.css";
 
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";

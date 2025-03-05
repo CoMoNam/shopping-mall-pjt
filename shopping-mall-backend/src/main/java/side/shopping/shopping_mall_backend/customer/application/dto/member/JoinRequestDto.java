@@ -11,30 +11,36 @@ import lombok.ToString;
 @Getter
 @Setter
 public class JoinRequestDto {
-    @NotEmpty(message = "EMAIL MUST NOT EMPTY")
+    @NotEmpty(message = "email MUST NOT EMPTY")
     @Size(min = 3, max = 255, message = "EMAIL MUST BE 3 - 255 LENGTH")
     @Email(message = "THIS IS NOT EMAIL")
     private String email;
 
-    @NotEmpty(message = "USERNAME MUST NOT EMPTY")
+    @NotEmpty(message = "username MUST NOT EMPTY")
     @Size(min = 1, max = 20, message = "USERNAME MUST BE 1 - 20 LENGTH")
     private String username;
 
-    @NotEmpty(message = "NICKNAME MUST NOT EMPTY")
+    @NotEmpty(message = "nickname MUST NOT EMPTY")
     @Size(min = 1, max = 20, message = "NICKNAME MUST BE 1 - 20 LENGTH")
     private String nickname;
 
-    @NotEmpty(message = "PASSWORD MUST NOT EMPTY")
+    @NotEmpty(message = "password MUST NOT EMPTY")
     @Size(min = 8, max = 12, message = "PASSWORD MUST BE 8 - 12 LENGTH")
     private String password;
 
-    @NotEmpty(message = "ADDRESS MUST NOT EMPTY")
+    @NotEmpty(message = "address MUST NOT EMPTY")
     @Size(min = 1, max = 255, message = "ADDRESS MUST BE 1 - 255 LENGTH")
     private String address;
 
     private String addressDetail;
 
     private String addressMore;
+
+    private boolean overAge;
+    private boolean termsOfService;
+    private boolean privacyPolicy;
+    private boolean marketingConsent;
+    private boolean notifications;
 
     public JoinRequestDto(String email, String username, String nickname, String password, String address, String addressDetail, String addressMore) {
         this.email = email;

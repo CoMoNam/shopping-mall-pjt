@@ -1,4 +1,4 @@
-package side.shopping.shopping_mall_backend.global.enums.member;
+package side.shopping.shopping_mall_backend.global.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import side.shopping.shopping_mall_backend.global.enums.member.Role;
+import side.shopping.shopping_mall_backend.global.enums.Role;
 import side.shopping.shopping_mall_backend.customer.domain.member.Member;
 
 @Getter
