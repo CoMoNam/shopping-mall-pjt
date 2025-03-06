@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-import side.shopping.shopping_mall_backend.global.exception.dto.ErrorResponseDto;
+import side.shopping.shopping_mall_backend.global.exception.ErrorResponseDto;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

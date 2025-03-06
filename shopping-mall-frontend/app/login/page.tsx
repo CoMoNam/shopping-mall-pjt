@@ -2,7 +2,7 @@
 
 import "../../styles/globals.css";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -14,8 +14,24 @@ import {
 import { FaGoogle } from "react-icons/fa";
 import { SiKakao } from "react-icons/si";
 import Link from "next/link";
+import { MemberRepository } from "@/repository/MemberRepository";
+import { LoginRequestDto } from "@/types/member";
 
 const Login = () => {
+  const memberRepository = new MemberRepository();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loginButtonClick = () => {
+    const loginRequestDto: LoginRequestDto = {
+      email: email,
+      password: password,
+    };
+
+    memberRepository.loginMember(loginRequestDto);
+  };
+
   return (
     <Container maxWidth="sm" sx={{ paddingY: 15 }}>
       <Paper
@@ -43,6 +59,8 @@ const Login = () => {
             InputLabelProps={{
               shrink: true, // 레이블을 항상 축소된 상태로 유지
             }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="비밀번호"
@@ -52,6 +70,8 @@ const Login = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <Button
@@ -65,6 +85,7 @@ const Login = () => {
                 backgroundColor: "#1a1a1a", // hover 시 색상 변경
               },
             }}
+            onClick={() => loginButtonClick()}
           >
             로그인
           </Button>

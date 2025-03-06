@@ -31,12 +31,12 @@ public class MemberServiceImpl implements MemberService{
 
         // email 중복 확인
         if (isEmailDuplicate(member.getEmail())) {
-            throw new IllegalArgumentException(Comments.IS_DUPLICATED.getDescriptionEn());
+            throw new IllegalArgumentException(Comments.EMAIL_IS_DUPLICATED.getDescriptionKo());
         }
 
         // nickname 중복 확인
-        if (isNicknameDuplicate(member.getEmail())) {
-            throw new IllegalArgumentException(Comments.IS_DUPLICATED.getDescriptionEn());
+        if (isNicknameDuplicate(member.getNickname())) {
+            throw new IllegalArgumentException(Comments.NICKNAME_IS_DUPLICATED.getDescriptionKo());
         }
 
         member.setPassword(passwordEncoder.encode(joinRequestDto.getPassword()));
@@ -49,11 +49,11 @@ public class MemberServiceImpl implements MemberService{
         Optional<Member> optionalMember = memberRepository.findByEmail(loginRequestDto.getEmail());
 
         if (optionalMember.isEmpty()) {
-            throw new UsernameNotFoundException(Comments.NOT_EXIST.getDescriptionEn());
+            throw new UsernameNotFoundException(Comments.NO_MEMBER_EXIST.getDescriptionKo());
         }
 
         if (!passwordEncoder.matches(loginRequestDto.getPassword(), optionalMember.get().getPassword())) {
-            throw new BadCredentialsException(Comments.NOT_MATCHED_PASSWORD.getDescriptionEn());
+            throw new BadCredentialsException(Comments.NOT_MATCHED_PASSWORD.getDescriptionKo());
         }
 
         CustomUserInfoDto customUserInfoDto = MemberMapper.INSTANCE.toCustomUserInfoDto(optionalMember.get());
@@ -61,12 +61,12 @@ public class MemberServiceImpl implements MemberService{
         return jwtUtil.createAccessToken(customUserInfoDto);
     }
 
-    // email 검증
+    // email 중복 검증
     public boolean isEmailDuplicate(String email) {
         return memberRepository.findByEmail(email).isPresent();
     }
 
-    // nickname 검증
+    // nickname 중복 검증
     public boolean isNicknameDuplicate(String nickname) {
         return memberRepository.findByNickname(nickname).isPresent();
     }

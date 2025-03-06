@@ -1,4 +1,4 @@
-package side.shopping.shopping_mall_backend.global.exception.dto;
+package side.shopping.shopping_mall_backend.global.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
 "use client";
 
+import { MemberRepository } from "@/repository/MemberRepository";
 import "../../styles/globals.css";
 
 import {
@@ -16,8 +17,19 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
+import { JoinRequestDto } from "@/types/member";
 
 const Join = () => {
+  const memberRepository = new MemberRepository();
+
+  // 회원 정보 관리
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [addressMore, setAddressMore] = useState("");
+
   // 상태 관리: 전체 동의, 개별 항목의 동의 상태
   const [allAgree, setAllAgree] = useState(false);
   const [agreements, setAgreements] = useState({
@@ -41,12 +53,6 @@ const Join = () => {
     });
   };
 
-  // 상태 관리: 비밀번호 관리
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-  const [passwordHelperText, setPasswordHelperText] = useState("");
-
   // 개별 항목 동의 관리
   const handleAgreementChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -57,6 +63,12 @@ const Join = () => {
       [name]: checked,
     }));
   };
+
+  // 상태 관리: 비밀번호 관리
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordHelperText, setPasswordHelperText] = useState("");
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -75,8 +87,24 @@ const Join = () => {
     }
   };
 
-  console.log("======>> 입력된정보::: ======>>");
-  console.log();
+  const joinButtonClick = () => {
+    const joinRequestDto: JoinRequestDto = {
+      email: email,
+      username: username,
+      nickname: nickname,
+      password: password,
+      address: address,
+      addressDetail: addressDetail,
+      addressMore: addressMore,
+      overAge: agreements.overAge,
+      termsOfService: agreements.termsOfService,
+      privacyPolicy: agreements.privacyPolicy,
+      marketingConsent: agreements.marketingConsent,
+      notifications: agreements.notifications,
+    };
+
+    memberRepository.joinMember(joinRequestDto);
+  };
 
   return (
     <Container maxWidth="sm" sx={{ paddingY: 15 }}>
@@ -107,6 +135,8 @@ const Join = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="사용자이름"
@@ -116,6 +146,8 @@ const Join = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             label="활동명"
@@ -125,6 +157,8 @@ const Join = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
           />
           <TextField
             label="비밀번호 설정"
@@ -160,6 +194,8 @@ const Join = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
           />
           <TextField
             label="상세주소"
@@ -169,6 +205,8 @@ const Join = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            value={addressDetail}
+            onChange={(e) => setAddressDetail(e.target.value)}
           />
           <TextField
             label="주소 추가사항"
@@ -178,6 +216,8 @@ const Join = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            value={addressMore}
+            onChange={(e) => setAddressMore(e.target.value)}
           />
 
           {/* 약관 동의 */}
@@ -208,7 +248,7 @@ const Join = () => {
                   <Checkbox
                     checked={agreements.overAge}
                     onChange={handleAgreementChange}
-                    name="over14"
+                    name="overAge"
                     sx={{
                       "&.Mui-checked": {
                         color: "black", // 체크박스를 선택했을 때 색상 변경
@@ -321,6 +361,7 @@ const Join = () => {
                 backgroundColor: "#1a1a1a",
               },
             }}
+            onClick={() => joinButtonClick()}
           >
             회원가입
           </Button>

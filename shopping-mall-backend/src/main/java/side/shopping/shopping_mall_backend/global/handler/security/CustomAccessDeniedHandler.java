@@ -12,7 +12,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 import side.shopping.shopping_mall_backend.global.enums.Comments;
-import side.shopping.shopping_mall_backend.global.exception.dto.ErrorResponseDto;
+import side.shopping.shopping_mall_backend.global.exception.ErrorResponseDto;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
