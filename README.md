@@ -17,4 +17,5 @@ ROLE - 일반 사용자, 판매자, 관리자, 슈퍼계정
 - Npm
 
 # 기능 (계속 업데이트 진행)
-- 회원가입 / Login (Spring Security Jwt Token)
+- 회원가입
+- Login (Spring Security Jwt Token) (-ing)
