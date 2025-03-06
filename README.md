@@ -9,7 +9,7 @@ side-project shopping-mall
 - JDK 21 version
 - Mysql 8
 - Docker 설치 (Mysql, Solr, Redis, ElasticSearch, Kibana, Logstash)
-- 
+
 # Frontend 환경
 - Next.js
 - Typescript
