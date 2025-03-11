@@ -32,6 +32,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         //JWT 헤더가 있을 경우
         if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             String token = authorizationHeader.substring(7);
+
             //JWT 유효성 검증
             if (jwtUtil.isValidToken(token)) {
                 Long userId = jwtUtil.getUserId(token);
@@ -39,7 +40,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 //유저와 토큰 일치 시 userDetails 생성
                 UserDetails userDetails = customUserDetailsService.loadUserByUsername(
                         userId.toString());
-
                 if (userDetails != null) {
                     //UserDetails, Password, Role -> 접근 권한 인증 Token 생성
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(

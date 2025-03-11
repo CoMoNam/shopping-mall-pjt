@@ -39,13 +39,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<String> handleUsernameNotFoundException(UsernameNotFoundException ex) {
-        // 에러 메시지를 HTTP 응답으로 반환
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<String> handleBadCredentialsException(BadCredentialsException ex) {
-        // 에러 메시지를 HTTP 응답으로 반환
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 }

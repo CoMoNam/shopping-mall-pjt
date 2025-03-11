@@ -4,6 +4,9 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 
 const Footer = () => {
+  // const pathname = usePathname(); // 현재 경로 가져오기
+  // const hideHeaderFooter = pathname === "/login" || pathname === "/join"; // 숨길 경로 조건
+
   return (
     <Box
       component="footer"

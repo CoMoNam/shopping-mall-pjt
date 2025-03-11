@@ -1,6 +1,8 @@
 package side.shopping.shopping_mall_backend.customer.application.service.member;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,7 +47,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public String login(LoginRequestDto loginRequestDto) {
+    public ResponseEntity<Void> login(LoginRequestDto loginRequestDto) {
         Optional<Member> optionalMember = memberRepository.findByEmail(loginRequestDto.getEmail());
 
         if (optionalMember.isEmpty()) {

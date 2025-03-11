@@ -13,11 +13,15 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.1",
     "@mui/material": "^6.4.1",
+    "@reduxjs/toolkit": "^2.6.1",
     "axios": "^1.7.9",
+    "cookie": "^1.0.2",
     "next": "15.1.6",
+    "next-redux-wrapper": "^8.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
+    "react-redux": "^9.2.0",
     "sweetalert2": "^11.17.2"
   },
   "devDependencies": {

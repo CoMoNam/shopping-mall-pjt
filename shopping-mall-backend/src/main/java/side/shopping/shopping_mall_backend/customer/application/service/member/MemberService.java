@@ -1,5 +1,6 @@
 package side.shopping.shopping_mall_backend.customer.application.service.member;
 
+import org.springframework.http.ResponseEntity;
 import side.shopping.shopping_mall_backend.customer.application.dto.member.JoinRequestDto;
 import side.shopping.shopping_mall_backend.customer.application.dto.member.LoginRequestDto;
 
@@ -8,5 +9,5 @@ import side.shopping.shopping_mall_backend.customer.application.dto.member.Login
  */
 public interface MemberService {
     void join(JoinRequestDto joinRequestDto);
-    String login(LoginRequestDto loginRequestDto);
+    ResponseEntity<Void> login(LoginRequestDto loginRequestDto);
 }

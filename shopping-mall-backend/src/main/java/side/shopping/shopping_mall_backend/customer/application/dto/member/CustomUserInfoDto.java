@@ -18,6 +18,7 @@ public class CustomUserInfoDto {
     private String nickname;
     private String password;
     private Role role;
+    private boolean isLoggedIn;
 
     public CustomUserInfoDto(Member member) {
         this.id = member.getId();

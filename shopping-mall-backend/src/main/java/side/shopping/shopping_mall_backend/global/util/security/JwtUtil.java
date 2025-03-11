@@ -3,9 +3,17 @@ package side.shopping.shopping_mall_backend.global.util.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import side.shopping.shopping_mall_backend.global.enums.Comments;
+import side.shopping.shopping_mall_backend.global.enums.Role;
 import side.shopping.shopping_mall_backend.global.enums.security.TokenStatus;
 import side.shopping.shopping_mall_backend.customer.application.dto.member.CustomUserInfoDto;
 
@@ -19,14 +27,20 @@ public class JwtUtil {
 
     private final Key key;
     private final long accessTokenExpTime;
+    private final boolean secure;
+    private final String sameSite;
 
     public JwtUtil(
             @Value("${jwt.secret-key}") final String secretKey,
-            @Value("${jwt.expiration-time}") final long accessTokenExpTime)
+            @Value("${jwt.expiration-time}") final long accessTokenExpTime,
+            @Value("${cookie.secure}") final boolean secure,
+            @Value("${cookie.sameSite}") final String sameSite)
     {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
         this.accessTokenExpTime = accessTokenExpTime;
+        this.secure = secure;
+        this.sameSite = sameSite;
     }
 
     /**
@@ -34,8 +48,31 @@ public class JwtUtil {
      *
      * @return Access Token String
      */
-    public String createAccessToken(CustomUserInfoDto customUserInfoDto) {
-        return createToken(customUserInfoDto, accessTokenExpTime);
+    public ResponseEntity<Void> createAccessToken(CustomUserInfoDto customUserInfoDto) {
+        // 현재 요청-응답 객체 가져오기
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attributes == null) {
+            throw new IllegalStateException("현재 요청 컨텍스트를 가져올 수 없습니다.");
+        }
+
+        HttpServletResponse response = attributes.getResponse();
+        if (response == null) {
+            throw new IllegalStateException("현재 응답 객체를 가져올 수 없습니다.");
+        }
+
+        String jwtToken = createToken(customUserInfoDto, accessTokenExpTime);
+
+        ResponseCookie cookie = ResponseCookie.from("jwt", jwtToken)
+                .httpOnly(true) // (JS 접근 방지)
+                .secure(secure) // HTTPS 에서만 전송 X -> local 개발환경
+                .sameSite(sameSite) // Cross-Origin 요청에서도 항상 쿠키가 전송되도록 허용. HTTPS 환경에서만 사용할 것을 권장하지만, HTTP 환경에서도 명시적으로 설정할 수 있음.
+                .path("/") // 쿠키가 유효한 경로 설정
+                .maxAge(accessTokenExpTime) // 만료시간
+                .build();
+
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -44,31 +81,53 @@ public class JwtUtil {
      * @return JWT String
      */
     private String createToken(CustomUserInfoDto customUserInfoDto, long expireTime) {
+        // Validate
+        if (customUserInfoDto == null) {
+            throw new IllegalArgumentException(Comments.CUSTOM_USER_INFO_NO_EXIST.getDescriptionEn());
+        }
+
+        if (key == null) {
+            throw new IllegalStateException(Comments.KEY_IS_NOT_SET.getDescriptionEn());
+        }
+
         Claims claims = Jwts.claims();
         claims.put("id", customUserInfoDto.getId());
         claims.put("email", customUserInfoDto.getEmail());
         claims.put("nickname", customUserInfoDto.getNickname());
         claims.put("role", customUserInfoDto.getRole());
 
-        ZonedDateTime now = ZonedDateTime.now();
-        ZonedDateTime tokenValidity = now.plusSeconds(expireTime);
+        ZonedDateTime currentTime = ZonedDateTime.now();
+        ZonedDateTime expirationTime = currentTime.plusSeconds(expireTime);
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setIssuedAt(Date.from(now.toInstant()))
-                .setExpiration(Date.from(tokenValidity.toInstant()))
+                .setIssuedAt(Date.from(currentTime.toInstant()))
+                .setExpiration(Date.from(expirationTime.toInstant()))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
     /**
-     * Token에서 User ID 추출
+     * Token 에서 User 정보 추출
      *
-     * @return User ID
+     * @return User 정보
      */
     public Long getUserId(String token) {
         return parseClaims(token).get("id", Long.class);
+    }
+    public String getEmail(String token) {
+        return parseClaims(token).get("email", String.class);
+    }
+    public String getNickname(String token) {
+        return parseClaims(token).get("nickname", String.class);
+    }
+    public Role getRole(String token) {
+        String roleString = parseClaims(token).get("role", String.class); // String으로 클레임 추출
+        if (roleString == null) {
+            throw new IllegalArgumentException("Role claim is missing from the token");
+        }
+        return Role.valueOf(roleString); // String을 Role enum으로 변환
     }
 
     /**

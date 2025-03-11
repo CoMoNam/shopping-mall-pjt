@@ -1,4 +1,4 @@
-package side.shopping.shopping_mall_backend.global.service;
+package side.shopping.shopping_mall_backend.global.service.security;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +35,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return member.getId().toString();
+    }
+
+    public String getNickname() {
+        return member.getNickname().toString();
     }
 
     @Override

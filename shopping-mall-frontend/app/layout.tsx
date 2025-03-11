@@ -1,7 +1,8 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import { Metadata } from "next";
 import "../styles/globals.css";
+import Footer from "@/components/Footer";
+import Providers from "@/components/Providers";
+import HeaderWrapper from "@/components/HeaderWrapper";
 
 export const metadata: Metadata = {
   title: "SIDEMALL",
@@ -16,9 +17,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="ko">
       <body className="body">
         <div className="main-container">
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <Providers>
+            <HeaderWrapper />
+            <main>{children}</main>
+            <Footer />
+          </Providers>
         </div>
       </body>
     </html>

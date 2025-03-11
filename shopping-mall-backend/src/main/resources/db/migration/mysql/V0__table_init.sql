@@ -1,0 +1,18 @@
+CREATE TABLE member (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(20) NOT NULL,
+    nickname VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    address_detail VARCHAR(255),
+    address_more VARCHAR(255),
+    role VARCHAR(50) NOT NULL,
+    over_age BOOLEAN DEFAULT FALSE,
+    terms_of_service BOOLEAN DEFAULT FALSE,
+    privacy_policy BOOLEAN DEFAULT FALSE,
+    marketing_consent BOOLEAN DEFAULT FALSE,
+    notifications BOOLEAN DEFAULT FALSE,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 생성 시간 (자동 생성)
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- 수정 시간 (자동 갱신)
+);

@@ -1,14 +1,18 @@
-import { JoinRequestDto, LoginRequestDto } from "@/types/member";
+import { JoinRequestDto, LoginRequestDto } from "@/types";
 import axios from "axios";
 import Swal from "sweetalert2";
-import "../styles/globals.css";
+import "../../styles/globals.css";
+import { apiClient } from "@/util/AxiosUtil";
+import { useRouter } from "next/navigation";
 
 export class MemberRepository {
   private baseUrl = process.env.NEXT_PUBLIC_API_URL + "/api/member";
 
+  router = useRouter();
+
   // 회원가입
-  joinMember = (joinRequestDto: JoinRequestDto): Promise<string> => {
-    return axios
+  joinMember = async (joinRequestDto: JoinRequestDto): Promise<string> => {
+    return await apiClient
       .post(`${this.baseUrl}/join`, joinRequestDto)
       .then((response) => {
         Swal.fire({
@@ -20,10 +24,7 @@ export class MemberRepository {
             confirmButton: "swal-ok-button", // OK 버튼 커스텀 클래스
           },
           preConfirm: () => {
-            return new Promise((resolve) => {
-              window.location.href = "/login";
-              resolve(null);
-            });
+            this.router.push("/login");
           },
         });
         return response.data; // 서버의 응답 데이터를 반환
@@ -53,13 +54,11 @@ export class MemberRepository {
   };
 
   // 로그인
-  loginMember = (loginRequestDto: LoginRequestDto): Promise<string> => {
-    return axios
+  loginMember = async (loginRequestDto: LoginRequestDto): Promise<boolean> => {
+    return await apiClient
       .post(`${this.baseUrl}/login`, loginRequestDto)
-      .then((response) => {
-        console.log("----성공----");
-        console.log(response.data);
-        return response.data; // 서버의 응답 데이터를 반환
+      .then(() => {
+        return true;
       })
       .catch((error) => {
         let responseErrorData = "";

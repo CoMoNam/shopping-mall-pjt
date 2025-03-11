@@ -34,6 +34,7 @@ public class Member extends Auditable {
     private String addressMore;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING) // Enum 값을 문자열로 저장
     private Role role;
 
     private boolean overAge;
