@@ -1,7 +1,6 @@
-# shopping-mall-pjt
-side-project shopping-mall
+# shopping-mall-project (계속 업데이트 진행)
 
-# 설명
+# 설명 
 쇼핑몰을 기반한 여러 백엔드 기술 구현 및 테스트
 
 # Backend 환경
@@ -17,6 +16,6 @@ side-project shopping-mall
 - Npm
 - 데이터 관리 redux , rtk 사용
 
-# 기능 (계속 업데이트 진행)
+# 기능 
 - 회원가입
 - Login (Spring Security Jwt Token) (-ing)
