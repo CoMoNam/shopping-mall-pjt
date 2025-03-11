@@ -6,7 +6,7 @@ import { apiClient } from "@/util/AxiosUtil";
 import { useRouter } from "next/navigation";
 
 export class MemberRepository {
-  private baseUrl = process.env.NEXT_PUBLIC_API_URL + "/api/member";
+  private baseUrl = "/api/member";
 
   router = useRouter();
 
@@ -57,8 +57,9 @@ export class MemberRepository {
   loginMember = async (loginRequestDto: LoginRequestDto): Promise<boolean> => {
     return await apiClient
       .post(`${this.baseUrl}/login`, loginRequestDto)
-      .then(() => {
-        return true;
+      .then((response) => {
+        window.location.href = "/";
+        return response.data;
       })
       .catch((error) => {
         let responseErrorData = "";

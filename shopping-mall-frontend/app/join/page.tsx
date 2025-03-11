@@ -122,15 +122,14 @@ const Join = () => {
           textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)", // 약간의 그림자 효과 추가
         }}
       >
-        <Link
-          href={"/"}
+        <span
           style={{
             textDecoration: "none", // 밑줄 제거
             color: "inherit", // Typography 색상 상속
           }}
         >
           SIDEMALL
-        </Link>
+        </span>
       </Typography>
       <Paper
         elevation={4}

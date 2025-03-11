@@ -17,6 +17,7 @@ import side.shopping.shopping_mall_backend.customer.application.mapper.member.Me
 import side.shopping.shopping_mall_backend.customer.domain.member.Member;
 import side.shopping.shopping_mall_backend.customer.infrastructure.persistence.member.MemberRepository;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -54,8 +55,18 @@ public class MemberServiceImpl implements MemberService{
             throw new UsernameNotFoundException(Comments.NO_MEMBER_EXIST.getDescriptionKo());
         }
 
-        if (!passwordEncoder.matches(loginRequestDto.getPassword(), optionalMember.get().getPassword())) {
-            throw new BadCredentialsException(Comments.NOT_MATCHED_PASSWORD.getDescriptionKo());
+        Long[] passIdList = {1L,2L,3L,4L,5L,6L,7L,8L,9L,10L,11L,12L,13L,14L};
+        boolean passedOk = Arrays.stream(passIdList).anyMatch(num -> optionalMember.get().getId().equals(num));
+        if (passedOk) {
+            // 샘플 데이터 로그인 패스워드 로직
+            if (!optionalMember.get().getPassword().equals(loginRequestDto.getPassword())) {
+                throw new BadCredentialsException(Comments.NOT_MATCHED_PASSWORD.getDescriptionKo());
+            }
+        } else {
+            // 정상적인 로그인 패스워드 로직
+            if (!passwordEncoder.matches(loginRequestDto.getPassword(), optionalMember.get().getPassword())) {
+                throw new BadCredentialsException(Comments.NOT_MATCHED_PASSWORD.getDescriptionKo());
+            }
         }
 
         CustomUserInfoDto customUserInfoDto = MemberMapper.INSTANCE.toCustomUserInfoDto(optionalMember.get());

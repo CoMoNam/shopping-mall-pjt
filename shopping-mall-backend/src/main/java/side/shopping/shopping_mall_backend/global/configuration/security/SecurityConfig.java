@@ -1,8 +1,6 @@
 package side.shopping.shopping_mall_backend.global.configuration.security;
 
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -38,6 +36,7 @@ public class SecurityConfig {
     private static final String[] AUTH_WHITELIST = {
             EndPoint.MEMBER_CONTROLLER + "/join",
             EndPoint.MEMBER_CONTROLLER + "/login",
+            EndPoint.AUTH_CONTROLLER + "/logout",
             EndPoint.AUTH_CONTROLLER + "/get_token_info"
     };
 

@@ -18,7 +18,7 @@ INSERT INTO member
 (5, 'customer2@naver.com', '사용자2', '사용자2', 'sample@1234', '서울시 용산구 용산동 한라아파트', '1101동 102호', '현관문 비밀번호 *1234', 'CUSTOMER', 1, 1, 1, 0, 0, '2025-03-11T19:54:34.135456', '2025-03-11T19:54:34.135456' );
 INSERT INTO member
 (id, email, username, nickname, password, address, address_detail, address_more, role, over_age, terms_of_service, privacy_policy, marketing_consent, notifications, created_at, updated_at) values
-(6, 'custome3@naver.com', '사용자3', '사용자3', 'sample@1234', '서울시 용산구 용산동 한라아파트', '1101동 102호', '현관문 비밀번호 *1234', 'CUSTOMER', 1, 1, 1, 0, 0, '2025-03-11T19:54:34.135456', '2025-03-11T19:54:34.135456' );
+(6, 'customer3@naver.com', '사용자3', '사용자3', 'sample@1234', '서울시 용산구 용산동 한라아파트', '1101동 102호', '현관문 비밀번호 *1234', 'CUSTOMER', 1, 1, 1, 0, 0, '2025-03-11T19:54:34.135456', '2025-03-11T19:54:34.135456' );
 INSERT INTO member
 (id, email, username, nickname, password, address, address_detail, address_more, role, over_age, terms_of_service, privacy_policy, marketing_consent, notifications, created_at, updated_at) values
 (7, 'customer4@naver.com', '사용자4', '사용자4', 'sample@1234', '서울시 용산구 용산동 한라아파트', '1101동 102호', '현관문 비밀번호 *1234', 'CUSTOMER', 1, 1, 1, 0, 0, '2025-03-11T19:54:34.135456', '2025-03-11T19:54:34.135456' );

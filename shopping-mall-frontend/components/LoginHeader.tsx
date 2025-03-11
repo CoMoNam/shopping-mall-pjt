@@ -6,16 +6,39 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import IconButton from "@mui/material/IconButton";
-import { Box, Tooltip } from "@mui/material";
+import { Box, Menu, MenuItem, Tooltip } from "@mui/material";
 
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { AuthRepository } from "@/repository/auth/AuthRepository";
 
 const LoginHeader = () => {
-  const router = useRouter();
+  const authRepository = new AuthRepository();
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  // 프로필 메뉴 열기
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  // 프로필 메뉴 닫기
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const logoutButtonClick = async () => {
+    handleMenuClose();
+    await authRepository.logoutMember();
+  };
+
+  const myInfoButtonClick = () => {
+    handleMenuClose();
+  };
   return (
     <AppBar
       position="sticky"
@@ -27,19 +50,27 @@ const LoginHeader = () => {
         backgroundColor: "#ffffff",
       }}
     >
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Box sx={{ width: "33.3%" }} />
+
         <Typography
           variant="h4" // 약간 더 눈에 띄는 크기
           sx={{
-            fontWeight: 700, // Bold한 느낌을 강조
-            color: "black", // 기본 색상
+            fontWeight: 700,
+            color: "black",
             cursor: "pointer",
             textAlign: "center",
-            flexGrow: 1, // 중앙 정렬
-            fontFamily: "'Poppins', sans-serif", // 세련된 로고용 폰트
-            letterSpacing: 2, // 글자 간격을 넓게 조정해 고급스러운 느낌
-            textTransform: "uppercase", // 대문자로 변환
-            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)", // 약간의 그림자 효과 추가
+            fontFamily: "'Poppins', sans-serif",
+            letterSpacing: 2,
+            textTransform: "uppercase",
+            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
+            width: "33.3%", // 중앙 영역 고정
           }}
         >
           <Link
@@ -54,12 +85,20 @@ const LoginHeader = () => {
         </Typography>
 
         {/* 아이콘 버튼들 오른쪽 정렬 */}
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box
+          sx={{
+            width: "33.3%",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+        >
           <Link href={"/order"}>
             <Tooltip title="주문" arrow>
               <IconButton aria-label="order">
                 <Badge
-                  badgeContent={4}
+                  badgeContent={0}
+                  showZero // content 가 0 이어도 ui 노출
                   color="error"
                   className="custom-badge" // CSS 클래스를 적용
                 >
@@ -72,7 +111,8 @@ const LoginHeader = () => {
             <Tooltip title="장바구니" arrow>
               <IconButton aria-label="cart">
                 <Badge
-                  badgeContent={10}
+                  badgeContent={0}
+                  showZero
                   color="error"
                   className="custom-badge" // CSS 클래스를 적용
                 >
@@ -81,16 +121,28 @@ const LoginHeader = () => {
               </IconButton>
             </Tooltip>
           </Link>
-          <IconButton
-            aria-label="mypage"
-            onClick={() => {
-              router.push("/mypage");
-            }}
-          >
+          <IconButton aria-label="mypage" onClick={handleMenuOpen}>
             <Badge color="secondary" className="custom-badge">
               <AccountCircleIcon fontSize="large" />
             </Badge>
           </IconButton>
+
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            <MenuItem onClick={myInfoButtonClick}>내 정보</MenuItem>
+            <MenuItem onClick={logoutButtonClick}>로그아웃</MenuItem>
+          </Menu>
         </Box>
       </Toolbar>
     </AppBar>

@@ -13,11 +13,12 @@ import {
 } from "@mui/material";
 import { FaGoogle } from "react-icons/fa";
 import { SiKakao } from "react-icons/si";
-import Link from "next/link";
 import { MemberRepository } from "@/repository/member/MemberRepository";
 import { LoginRequestDto } from "@/types";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
   const memberRepository = new MemberRepository();
 
   const [email, setEmail] = useState("");
@@ -28,11 +29,7 @@ const Login = () => {
       email: email,
       password: password,
     };
-
-    const response = await memberRepository.loginMember(loginRequestDto);
-    if (response) {
-      window.location.href = "/";
-    }
+    await memberRepository.loginMember(loginRequestDto);
   };
 
   return (
@@ -51,15 +48,14 @@ const Login = () => {
           textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)", // 약간의 그림자 효과 추가
         }}
       >
-        <Link
-          href={"/"}
+        <span
           style={{
             textDecoration: "none", // 밑줄 제거
             color: "inherit", // Typography 색상 상속
           }}
         >
           SIDEMALL
-        </Link>
+        </span>
       </Typography>
       <Paper
         elevation={4}
@@ -138,24 +134,23 @@ const Login = () => {
             }}
           >
             아이디가 없으신가요?{" "}
-            <Link href={"/join"} style={{ color: "inherit" }}>
-              <Button
-                variant="text"
-                sx={{
-                  textTransform: "none",
-                  color: "inherit",
-                  fontSize: "inherit",
-                  padding: 0,
-                  textDecoration: "underline",
-                  "&:hover": {
-                    backgroundColor: "transparent",
-                    color: "black",
-                  },
-                }}
-              >
-                회원가입 하러가기
-              </Button>
-            </Link>
+            <Button
+              variant="text"
+              sx={{
+                textTransform: "none",
+                color: "inherit",
+                fontSize: "inherit",
+                padding: 0,
+                textDecoration: "underline",
+                "&:hover": {
+                  backgroundColor: "transparent",
+                  color: "black",
+                },
+              }}
+              onClick={() => router.push("/join")}
+            >
+              회원가입 하러가기
+            </Button>
           </Typography>
 
           {/* 비밀번호를 잊으셨나요? 비밀번호 찾기 하러가기 텍스트 */}

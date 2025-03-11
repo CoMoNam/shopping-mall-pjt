@@ -1,5 +1,7 @@
 package side.shopping.shopping_mall_backend.customer.web.authority;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -26,4 +28,5 @@ public class AuthorityController {
         authorityService.requestAuthority(authorityRequestDto);
         return ResponseEntity.ok().body(Comments.TRANSACTION_SUCCESS.getDescriptionEn());
     }
+
 }
