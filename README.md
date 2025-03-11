@@ -9,11 +9,13 @@ side-project shopping-mall
 - JDK 21 version
 - Mysql 8
 - Docker 설치 (Mysql, Solr, Redis, ElasticSearch, Kibana, Logstash)
+- 데이터 관리 -> flyway migration 으로 관리 , jpa ddl-auto : none
 
 # Frontend 환경
 - Next.js
 - Typescript
 - Npm
+- 데이터 관리 redux , rtk 사용
 
 # 기능 (계속 업데이트 진행)
 - 회원가입
