@@ -8,7 +8,7 @@
 - JDK 21 version
 - Mysql 8
 - Docker 설치 (Mysql, Solr, Redis, ElasticSearch, Kibana, Logstash)
-- 데이터 관리 -> flyway migration 으로 관리 , jpa ddl-auto : none
+- 데이터베이스 관리 -> flyway migration 으로 관리 , jpa ddl-auto : none
 
 # Frontend 환경
 - Next.js
