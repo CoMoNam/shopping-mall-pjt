@@ -13,10 +13,16 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
-import { AuthRepository } from "@/repository/auth/AuthRepository";
+import { AuthRepository } from "@/repository/global/auth/AuthRepository";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { Role } from "@/types/member/Role";
+import { useRouter } from "next/navigation";
 
 const LoginHeader = () => {
   const authRepository = new AuthRepository();
+  const auth = useSelector((state: RootState) => state.auth);
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -38,6 +44,11 @@ const LoginHeader = () => {
 
   const myInfoButtonClick = () => {
     handleMenuClose();
+  };
+
+  const sellerManageButtonClick = () => {
+    handleMenuClose();
+    router.push("/product");
   };
   return (
     <AppBar
@@ -141,6 +152,9 @@ const LoginHeader = () => {
             }}
           >
             <MenuItem onClick={myInfoButtonClick}>내 정보</MenuItem>
+            {auth.user?.role !== Role.CUSTOMER && (
+              <MenuItem onClick={sellerManageButtonClick}>판매관리</MenuItem>
+            )}
             <MenuItem onClick={logoutButtonClick}>로그아웃</MenuItem>
           </Menu>
         </Box>

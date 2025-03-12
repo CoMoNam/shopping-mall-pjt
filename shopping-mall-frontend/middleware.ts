@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
-  // 비로그인 일때만 허용 경로
+  // 비로그인 ONLY 경로
   const noAuthPages = ["/login", "/join"];
+  // 현재경로확인
+  const currentPath = req.nextUrl.pathname;
 
   // JWT 쿠키 확인
   const cookie = req.cookies.get("jwt");
-  // 현재경로확인
-  const currentPath = req.nextUrl.pathname;
 
   if (cookie && noAuthPages.includes(currentPath)) {
     // 로그인 상태라면 메인 페이지로 리다이렉트

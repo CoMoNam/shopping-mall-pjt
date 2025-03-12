@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import Header from "./Header";
 import { JwtRequestInfo, LoginUser } from "@/types";
-import { AuthRepository } from "@/repository/auth/AuthRepository";
+import { AuthRepository } from "@/repository/global/auth/AuthRepository";
 
 export default async function HeaderWrapper() {
   const authRepository = new AuthRepository();
@@ -17,7 +17,7 @@ export default async function HeaderWrapper() {
     try {
       const response = await authRepository.getJwtInfo(jwtInfo);
 
-      if (response.isLoggedIn) {
+      if (response && response.isLoggedIn) {
         loginUser = response;
       }
     } catch (error) {

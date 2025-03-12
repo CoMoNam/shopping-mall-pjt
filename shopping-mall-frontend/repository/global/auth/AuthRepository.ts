@@ -4,7 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export class AuthRepository {
-  private baseUrl = "/api/auth";
+  private baseUrl = "/api/global/auth";
 
   getJwtInfo = async (jwtRequestInfo: JwtRequestInfo): Promise<LoginUser> => {
     return await apiClient
@@ -13,7 +13,7 @@ export class AuthRepository {
         return response.data;
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response);
       });
   };
 
@@ -48,7 +48,7 @@ export class AuthRepository {
               title: "swal-error-title", // 커스텀 클래스 추가
             },
           });
-          return error.response.data; // 서버의 에러 메시지를 반환
+          return error.response.data;
         }
       });
   };

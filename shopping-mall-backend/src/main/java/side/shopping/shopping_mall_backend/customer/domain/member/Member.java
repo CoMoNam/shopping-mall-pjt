@@ -37,11 +37,11 @@ public class Member extends Auditable {
     @Enumerated(EnumType.STRING) // Enum 값을 문자열로 저장
     private Role role;
 
-    private boolean overAge;
-    private boolean termsOfService;
-    private boolean privacyPolicy;
-    private boolean marketingConsent;
-    private boolean notifications;
+    private Boolean overAge;
+    private Boolean termsOfService;
+    private Boolean privacyPolicy;
+    private Boolean marketingConsent;
+    private Boolean notifications;
 
     @PrePersist
     public void prePersistUserType() {

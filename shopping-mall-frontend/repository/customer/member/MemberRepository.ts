@@ -1,12 +1,12 @@
 import { JoinRequestDto, LoginRequestDto } from "@/types";
 import axios from "axios";
 import Swal from "sweetalert2";
-import "../../styles/globals.css";
+import "../../../styles/globals.css";
 import { apiClient } from "@/util/AxiosUtil";
 import { useRouter } from "next/navigation";
 
 export class MemberRepository {
-  private baseUrl = "/api/member";
+  private baseUrl = "/api/customer/member";
 
   router = useRouter();
 
