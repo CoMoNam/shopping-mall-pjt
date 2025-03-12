@@ -18,4 +18,4 @@
 
 # 기능 
 - 회원가입
-- Login (Spring Security Jwt Token) (-ing)
+- Login / Logout (Spring Security Jwt Token) , XSS 공격 방지 HttpOnly 쿠키 방식
