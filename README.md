@@ -14,7 +14,7 @@
 
 # Frontend 환경
 
-- Next.js
+- Next.js (App router ver.)
 - Typescript
 - Npm
 - 데이터 관리 redux , rtk 사용
