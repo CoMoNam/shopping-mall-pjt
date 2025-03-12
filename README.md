@@ -19,3 +19,4 @@
 # 기능 
 - 회원가입
 - Login / Logout (Spring Security Jwt Token) , XSS 공격 방지 HttpOnly 쿠키 방식
+- 상품 관리 (상품 등록, 조회, 통계 차트) // 진행중
