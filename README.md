@@ -8,7 +8,7 @@
 - JDK 21 version
 - Mysql 8
 - Docker 설치 (Mysql, Solr, Redis, ElasticSearch, Kibana, Logstash)
-- 데이터 관리 -> flyway migration 으로 관리 , jpa ddl-auto : none
+- 데이터베이스 관리 -> flyway migration 으로 관리 , jpa ddl-auto : none
 
 # Frontend 환경
 - Next.js
@@ -18,4 +18,4 @@
 
 # 기능 
 - 회원가입
-- Login (Spring Security Jwt Token) (-ing)
+- Login / Logout (Spring Security Jwt Token) , XSS 공격 방지 HttpOnly 쿠키 방식
