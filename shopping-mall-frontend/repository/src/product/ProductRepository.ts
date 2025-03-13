@@ -1,4 +1,4 @@
-import { ProductSaveDto } from "@/types";
+import { ProductListDto, ProductSaveDto } from "@/types";
 import { apiClient } from "@/util/AxiosUtil";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -51,6 +51,35 @@ export class ProductRepository {
       })
       .catch((error) => {
         return error.response.data;
+      });
+  };
+
+  // 상품수정
+  update = async (productListDto: ProductListDto) => {
+    return await apiClient
+      .put(`${this.baseUrl}`, productListDto)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        let responseErrorData = "";
+        if (axios.isAxiosError(error) && error.response) {
+          if (Array.isArray(error.response.data)) {
+            responseErrorData = error.response.data.join("<br>");
+          } else {
+            responseErrorData = error.response.data;
+          }
+          Swal.fire({
+            icon: "error",
+            html: responseErrorData,
+            showConfirmButton: false,
+            timer: 2000,
+            customClass: {
+              title: "swal-error-title",
+            },
+          });
+          return error.response.data;
+        }
       });
   };
 }

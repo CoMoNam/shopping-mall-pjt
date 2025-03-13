@@ -22,6 +22,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { ProductRepository } from "@/repository/src/product/ProductRepository";
 import { ProductListDto } from "@/types";
 import "../../styles/globals.css";
+import Swal from "sweetalert2";
 
 const ProductList = () => {
   const [productList, setProductList] = useState<ProductListDto[]>([]);
@@ -39,6 +40,10 @@ const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState<ProductListDto | null>(
     null
   ); // 선택된 제품 정보
+
+  // 수정시 사용되는 데이터
+  const [modifyPrice, setModifyPrice] = useState(0);
+  const [addProductQuantity, setAddProductQuantity] = useState(0);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -89,12 +94,38 @@ const ProductList = () => {
   const handleCloseModal = () => {
     setOpenModal(false);
     setSelectedProduct(null);
+    setAddProductQuantity(0);
+    setModifyPrice(0);
   };
 
-  const modifyButtonClick = () => {
-    handleCloseModal();
-  };
+  const modifyButtonClick = async () => {
+    const productRepository = new ProductRepository();
+    const product: ProductListDto = {
+      id: selectedProduct!.id,
+      name: selectedProduct!.name,
+      description: selectedProduct!.description,
+      price: modifyPrice, // 실제로 바뀔내용
+      quantity: selectedProduct!.quantity + addProductQuantity, // 실제로 바뀔내용
+      totalScore: selectedProduct!.totalScore,
+      reviewCnt: selectedProduct!.reviewCnt,
+      rating: selectedProduct!.rating,
+      sellerId: selectedProduct!.sellerId,
+      categoryName: selectedProduct!.categoryName,
+    };
 
+    const result = await productRepository.update(product);
+    if (result != null && result === "transaction is successfully completed") {
+      Swal.fire({
+        title: "상품이 수정되었습니다.",
+        showConfirmButton: true,
+        customClass: {
+          title: "swal-confirm-title", // 제목 커스텀 클래스
+          confirmButton: "swal-ok-button", // OK 버튼 커스텀 클래스
+        },
+      });
+      handleCloseModal();
+    }
+  };
   return (
     <>
       <Box sx={{ paddingX: "5%", paddingY: 1, width: "100%" }}>
@@ -237,7 +268,9 @@ const ProductList = () => {
         <Dialog
           open={openModal}
           onClose={handleCloseModal}
-          sx={{ "& .MuiDialog-paper": { width: "1000px" } }}
+          sx={{}}
+          maxWidth="sm"
+          fullWidth={true}
         >
           <DialogTitle>제품 상세</DialogTitle>
           <DialogContent>
@@ -247,19 +280,112 @@ const ProductList = () => {
                 <Typography variant="body1" color="textSecondary">
                   {selectedProduct.description}
                 </Typography>
-                <Typography variant="h6" sx={{ marginTop: 2 }}>
-                  가격: {selectedProduct.price.toLocaleString("ko-KR")}원
-                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginTop: 2,
+                  }}
+                >
+                  <Box>
+                    {/* 기존 가격 (조건부로 취소선 표시) */}
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        textDecoration:
+                          modifyPrice > 0 ? "line-through" : "none",
+                        color: modifyPrice > 0 ? "gray" : "inherit",
+                      }}
+                    >
+                      가격: {selectedProduct.price.toLocaleString("ko-KR")}원
+                    </Typography>
+
+                    {/* 수정된 가격이 존재할 때는 새로운 가격도 함께 보여주기 */}
+                    {modifyPrice > 0 && (
+                      <Typography variant="h6" sx={{ color: "red" }}>
+                        ➝ 수정가: {modifyPrice.toLocaleString("ko-KR")}원
+                      </Typography>
+                    )}
+                  </Box>
+
+                  <TextField
+                    label="가격수정"
+                    type="text"
+                    variant="outlined"
+                    className="textField"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    value={modifyPrice}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        setModifyPrice(value === "" ? 0 : Number(value));
+                      }
+                    }}
+                    sx={{ maxWidth: "200px", ml: 2 }}
+                  />
+                </Box>
+
                 <Typography variant="body2" color="textSecondary">
                   리뷰: {selectedProduct.reviewCnt} 개 | 평점:{" "}
                   {selectedProduct.rating}
                 </Typography>
-                <Typography variant="body2" color="error" sx={{ marginTop: 1 }}>
-                  재고: {selectedProduct.quantity}
-                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginTop: 2,
+                  }}
+                >
+                  <Box>
+                    {/* 기존 재고 표시: 재고추가 값이 0 이상이면 취소선 처리 */}
+                    <Typography
+                      variant="body2"
+                      color="error"
+                      sx={{
+                        marginTop: 1,
+                        textDecoration:
+                          addProductQuantity > 0 ? "line-through" : "none",
+                        color: addProductQuantity > 0 ? "gray" : "error.main",
+                      }}
+                    >
+                      재고: {selectedProduct.quantity}
+                    </Typography>
+
+                    {/* 재고추가 값이 있을 때 추가로 보여주기 */}
+                    {addProductQuantity > 0 && (
+                      <Typography variant="body2" sx={{ color: "red" }}>
+                        ➝ 추가재고포함:{" "}
+                        {selectedProduct.quantity + addProductQuantity} 개
+                      </Typography>
+                    )}
+                  </Box>
+
+                  <TextField
+                    label="재고추가"
+                    type="text"
+                    variant="outlined"
+                    className="textField"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    value={addProductQuantity}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        setAddProductQuantity(value === "" ? 0 : Number(value));
+                      }
+                    }}
+                    sx={{ maxWidth: "200px", ml: 2 }}
+                  />
+                </Box>
               </>
             )}
           </DialogContent>
+
           <DialogActions>
             <Button sx={{ color: "black" }} onClick={handleCloseModal}>
               취소
