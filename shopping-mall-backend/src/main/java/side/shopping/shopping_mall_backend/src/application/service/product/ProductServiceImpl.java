@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import side.shopping.shopping_mall_backend.global.util.security.LoginUserUtil;
+import side.shopping.shopping_mall_backend.src.application.dto.product.ProductUpdateDto;
 import side.shopping.shopping_mall_backend.src.application.mapper.product.ProductMapper;
 import side.shopping.shopping_mall_backend.src.domain.product.Product;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSaveDto;
@@ -34,6 +35,18 @@ public class ProductServiceImpl implements ProductService{
         } else {
             return productRepository.findByNameContainingAndSellerIdOrderByCreatedAtDesc(name, loginUserUtil.getCurrentUserId(), pageable);
         }
+    }
+
+    //해당 상품 삭제
+    @Override
+    public void delete(Long id) {
+        productRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(ProductUpdateDto productUpdateDto) {
+        Product product = ProductMapper.INSTANCE.toProduct(productUpdateDto);
+        productRepository.save(product);
     }
 
     //평점 계산

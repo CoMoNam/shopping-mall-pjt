@@ -82,4 +82,28 @@ export class ProductRepository {
         }
       });
   };
+
+  delete = async (id: number) => {
+    return await apiClient
+      .delete(`${this.baseUrl}`, {
+        params: { id },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        if (axios.isAxiosError(error) && error.response) {
+          Swal.fire({
+            icon: "error",
+            html: error.response.data,
+            showConfirmButton: false,
+            timer: 2000,
+            customClass: {
+              title: "swal-error-title",
+            },
+          });
+          return error.response.data;
+        }
+      });
+  };
 }

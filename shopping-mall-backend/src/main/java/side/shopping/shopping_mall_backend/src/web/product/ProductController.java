@@ -5,10 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.enums.EndPoint;
+import side.shopping.shopping_mall_backend.src.application.dto.product.ProductUpdateDto;
 import side.shopping.shopping_mall_backend.src.application.service.product.ProductService;
 import side.shopping.shopping_mall_backend.src.domain.product.Product;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSaveDto;
@@ -20,6 +22,7 @@ import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSa
 public class ProductController {
     private final ProductService productService;
 
+    // 상품 기본 CLUD
     @PostMapping
     public ResponseEntity<String> save(@Valid @RequestBody ProductSaveDto productSaveDto) {
         productService.save(productSaveDto);
@@ -34,5 +37,17 @@ public class ProductController {
     ) {
         Pageable pageable = PageRequest.of(page, size);     // 페이징 조건 생성
         return productService.getProductList(name, pageable); // 결과 반환
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestParam Long id) {
+        productService.delete(id);
+        return ResponseEntity.ok(Comments.TRANSACTION_SUCCESS.getDescriptionEn());
+    }
+
+    @PutMapping
+    public ResponseEntity<String> update(@Valid @RequestBody ProductUpdateDto productUpdateDto) {
+        productService.update(productUpdateDto);
+        return ResponseEntity.ok(Comments.TRANSACTION_SUCCESS.getDescriptionEn());
     }
 }

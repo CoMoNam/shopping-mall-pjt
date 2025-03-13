@@ -52,6 +52,9 @@ const ProductList = () => {
     setPage(value - 1);
   };
 
+  // 수정 삭제시 화면 리로드 트리거
+  const [reloadTrigger, setReloadTrigger] = useState(false);
+
   useEffect(() => {
     const getProductList = async () => {
       const productRepository = new ProductRepository();
@@ -84,7 +87,7 @@ const ProductList = () => {
     }
 
     prevSearchKeyword.current = searchKeyword;
-  }, [searchKeyword, page, size]);
+  }, [searchKeyword, page, size, typingTimeout, reloadTrigger]);
 
   const handleProductClick = (product: ProductListDto) => {
     setSelectedProduct(product);
@@ -104,7 +107,7 @@ const ProductList = () => {
       id: selectedProduct!.id,
       name: selectedProduct!.name,
       description: selectedProduct!.description,
-      price: modifyPrice, // 실제로 바뀔내용
+      price: modifyPrice > 0 ? modifyPrice : selectedProduct!.price, // 실제로 바뀔내용
       quantity: selectedProduct!.quantity + addProductQuantity, // 실제로 바뀔내용
       totalScore: selectedProduct!.totalScore,
       reviewCnt: selectedProduct!.reviewCnt,
@@ -123,6 +126,25 @@ const ProductList = () => {
           confirmButton: "swal-ok-button", // OK 버튼 커스텀 클래스
         },
       });
+      setReloadTrigger(!reloadTrigger);
+      handleCloseModal();
+    }
+  };
+
+  const deleteButtonClick = async () => {
+    const productRepository = new ProductRepository();
+    const result = await productRepository.delete(selectedProduct!.id);
+
+    if (result != null && result === "transaction is successfully completed") {
+      Swal.fire({
+        title: "상품이 삭제되었습니다.",
+        showConfirmButton: true,
+        customClass: {
+          title: "swal-confirm-title", // 제목 커스텀 클래스
+          confirmButton: "swal-ok-button", // OK 버튼 커스텀 클래스
+        },
+      });
+      setReloadTrigger(!reloadTrigger);
       handleCloseModal();
     }
   };
@@ -210,57 +232,58 @@ const ProductList = () => {
           </Box>
         ) : (
           <Grid container spacing={2}>
-            {productList.map((product) => (
-              <Grid item xs={12} sm={6} md={2.4} key={product.id}>
-                <Card
-                  sx={{
-                    textAlign: "center",
-                    cursor: "pointer",
-                    transition: "all 0.3s ease-in-out",
-                    height: "390px",
-                  }}
-                  onClick={() => handleProductClick(product)} // 제품 클릭 시 모달 띄우기
-                >
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={`https://picsum.photos/300/200?random=${Math.floor(
-                      Math.random() * 1000
-                    )}`}
-                    alt={product.name}
-                  />
-                  <CardContent>
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        height: "70px",
-                      }}
-                    >
-                      {product.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      sx={{ height: "30px" }}
-                    >
-                      {product.price.toLocaleString("ko-KR")}
-                    </Typography>
-                    <Rating value={product.rating} readOnly />
-                    <Typography variant="body2" color="textSecondary">
-                      {product.reviewCnt} 후기
-                    </Typography>
-                    <Typography variant="body2" color="error">
-                      {product.quantity} 재고
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
+            {productList &&
+              productList.map((product) => (
+                <Grid item xs={12} sm={6} md={2.4} key={product.id}>
+                  <Card
+                    sx={{
+                      textAlign: "center",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease-in-out",
+                      height: "390px",
+                    }}
+                    onClick={() => handleProductClick(product)} // 제품 클릭 시 모달 띄우기
+                  >
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={`https://picsum.photos/300/200?random=${Math.floor(
+                        Math.random() * 1000
+                      )}`}
+                      alt={product.name}
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          height: "70px",
+                        }}
+                      >
+                        {product.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        sx={{ height: "30px" }}
+                      >
+                        {product.price.toLocaleString("ko-KR")}
+                      </Typography>
+                      <Rating value={product.rating} readOnly />
+                      <Typography variant="body2" color="textSecondary">
+                        {product.reviewCnt} 후기
+                      </Typography>
+                      <Typography variant="body2" color="error">
+                        {product.quantity} 재고
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
           </Grid>
         )}
 
@@ -386,13 +409,25 @@ const ProductList = () => {
             )}
           </DialogContent>
 
-          <DialogActions>
-            <Button sx={{ color: "black" }} onClick={handleCloseModal}>
-              취소
-            </Button>
-            <Button sx={{ color: "black" }} onClick={modifyButtonClick}>
-              수정
-            </Button>
+          <DialogActions
+            sx={{ display: "flex", justifyContent: "space-between", px: 3 }}
+          >
+            {/* 왼쪽 - 삭제 버튼 */}
+            <Box>
+              <Button sx={{ color: "black" }} onClick={deleteButtonClick}>
+                삭제
+              </Button>
+            </Box>
+
+            {/* 오른쪽 - 취소, 수정 버튼 */}
+            <Box>
+              <Button sx={{ color: "black" }} onClick={handleCloseModal}>
+                취소
+              </Button>
+              <Button sx={{ color: "black" }} onClick={modifyButtonClick}>
+                수정
+              </Button>
+            </Box>
           </DialogActions>
         </Dialog>
       </Box>
