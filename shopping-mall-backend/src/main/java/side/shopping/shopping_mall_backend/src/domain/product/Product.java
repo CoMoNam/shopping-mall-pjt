@@ -2,7 +2,11 @@ package side.shopping.shopping_mall_backend.src.domain.product;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import side.shopping.shopping_mall_backend.global.mvc.domain.jpa.Auditable;
+
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -18,11 +22,12 @@ public class Product extends Auditable {
     private String name;
     private String description;
     @Column(nullable = false)
-    private Integer price;
+    private int price;
     @Column(nullable = false)
-    private Integer quantity;
-    private Integer totalScore;
-    private Integer reviewCnt;
-    private Double rating;
+    private int quantity;
+    private int totalScore;
+    private int reviewCnt;
+    private double rating;
     private Long sellerId;
+    private String categoryName;
 }

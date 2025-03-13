@@ -12,6 +12,8 @@ public class ProductSaveDto {
     @NotEmpty(message = "* 상품명이 필요합니다 *")
     private String name;
     private String description;
-    private Integer price;
-    private Integer quantity;
+    private int price;
+    private int quantity;
+    @NotEmpty(message = "* 카테고리 선택 필수 *")
+    private String categoryName;
 }

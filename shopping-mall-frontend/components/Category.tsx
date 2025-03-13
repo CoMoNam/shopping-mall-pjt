@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import CheckroomSharpIcon from "@mui/icons-material/CheckroomSharp";
@@ -33,6 +32,14 @@ const categories = [
 ];
 
 const Category = () => {
+  // const iconMap: Record<string, () => JSX.Element> = {
+  //   car: () => <CarIcon />,
+  //   home: () => <HomeIcon />,
+  //   dog: () => <DogIcon />,
+  // };
+
+  // const IconComponent = iconMap[iconNameFromDB] || (() => <DefaultIcon />);
+  // return <IconComponent />;
   return (
     <Box sx={{ paddingX: "20%", paddingY: 3 }}>
       <Grid container spacing={3}>

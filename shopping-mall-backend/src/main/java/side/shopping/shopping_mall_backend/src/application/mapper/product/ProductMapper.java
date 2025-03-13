@@ -16,6 +16,7 @@ public interface ProductMapper {
             @Mapping(source = "description", target = "description"),
             @Mapping(source = "price", target = "price"),
             @Mapping(source = "quantity", target = "quantity"),
+            @Mapping(source = "categoryName", target = "categoryName")
     })
     Product toProduct(ProductSaveDto productSaveDto);
 }

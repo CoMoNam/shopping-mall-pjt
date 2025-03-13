@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -16,6 +16,7 @@ import { Category, ProductSaveDto } from "@/types";
 import { ProductRepository } from "@/repository/src/product/ProductRepository";
 import Swal from "sweetalert2";
 import "../../styles/globals.css";
+import { CategoryRepository } from "@/repository/src/category/CategoryRepository";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
@@ -61,6 +62,7 @@ const ProductAdd = () => {
       description: description,
       price: price,
       quantity: quantity,
+      categoryName: category,
     };
 
     const result = await productRepository.save(product);
@@ -82,6 +84,14 @@ const ProductAdd = () => {
       setCategory("");
     }
   };
+
+  useEffect(() => {
+    const callGetCategoryList = async () => {
+      const categoryRepository = new CategoryRepository();
+      setCategoryList(await categoryRepository.getCategoryList());
+    };
+    callGetCategoryList();
+  }, []);
 
   return (
     <Container maxWidth="xl" sx={{ paddingY: 1, marginTop: 8 }}>
@@ -183,23 +193,12 @@ const ProductAdd = () => {
             <MenuItem value="" disabled>
               카테고리 선택
             </MenuItem>
-            {categoryList.map((i) => (
-              <MenuItem
-                key={i.id}
-                value={i.name}
-                // sx={{
-                //   "&.Mui-selected": {
-                //     backgroundColor: "black",
-                //     color: "white",
-                //   },
-                //   "&.Mui-selected:hover": {
-                //     backgroundColor: "#333", // 선택+hover시
-                //   },
-                // }}
-              >
-                {i.name}
-              </MenuItem>
-            ))}
+            {Array.isArray(categoryList) &&
+              categoryList.map((i) => (
+                <MenuItem key={i.id} value={i.name}>
+                  {i.name}
+                </MenuItem>
+              ))}
           </Select>
 
           <TextField

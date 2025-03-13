@@ -51,79 +51,79 @@ INSERT INTO member
 
 /** product 샘플 데이터 **/
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(1, '삼립 돌아온 로켓단 초코롤, 85g, 1개', '맛있는 초코롤 입니다.', 1200, 582, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(1, '삼립 돌아온 로켓단 초코롤, 85g, 1개', '맛있는 초코롤 입니다.', 1200, 582, 0, 0, 0.0, 9, '식품');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(2, '백설 숯불갈비맛 후랑크, 120g, 1개, 85g, 1개', '맛있는 후랑 입니다.', 3000, 312, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(2, '백설 숯불갈비맛 후랑크, 120g, 1개, 85g, 1개', '맛있는 후랑 입니다.', 3000, 312, 0, 0, 0.0, 9, '식품');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(3, 'LG전자 디오스 오브제컬렉션 832L 양문형 냉장고 메탈', '가성비 좋은 냉장고 LG 냉장고', 2400000, 43, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(3, 'LG전자 디오스 오브제컬렉션 832L 양문형 냉장고 메탈', '가성비 좋은 냉장고 LG 냉장고', 2400000, 43, 0, 0, 0.0, 9, '가전제품');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(4, '스마트 TV + 삼탠바이미 V1 이동식 거치대 세트', '가성비 좋은 TV smart TV', 400000, 42, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(4, '스마트 TV + 삼탠바이미 V1 이동식 거치대 세트', '가성비 좋은 TV smart TV', 400000, 42, 0, 0, 0.0, 9, '가전제품');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(5, '게이밍PC i5 13400F RTX4060 조립컴퓨터', '가성비 좋은 컴퓨터 게이밍 컴퓨터', 2000000, 42, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(5, '게이밍PC i5 13400F RTX4060 조립컴퓨터', '가성비 좋은 컴퓨터 게이밍 컴퓨터', 2000000, 42, 0, 0, 0.0, 9, '컴퓨터/노트북');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(6, '베이직스 2024 베이직북 16 N-시리즈 N95', '가성비 좋은 노트북', 1000000, 42, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(6, '베이직스 2024 베이직북 16 N-시리즈 N95', '가성비 좋은 노트북', 1000000, 42, 0, 0, 0.0, 9, '컴퓨터/노트북');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(7, '에어로케이 제주도 항공권 특가 항공권 제주 항공권', '얼른 떠나자', 500000, 42, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(7, '에어로케이 제주도 항공권 특가 항공권 제주 항공권', '얼른 떠나자', 500000, 42, 0, 0, 0.0, 9, '여행');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(8, '로얄리노 대용량 이불 옷 패브릭 정리함', '옷 이불 모든것들을 한번에', 20000, 42, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(8, '로얄리노 대용량 이불 옷 패브릭 정리함', '옷 이불 모든것들을 한번에', 20000, 42, 0, 0, 0.0, 9, '홈인테리어');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(9, '샤넬 립스틱 한정판 시즌-2025', '샤넬 립스틱 한정판 마지막 판매', 200000, 84, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(9, '샤넬 립스틱 한정판 시즌-2025', '샤넬 립스틱 한정판 마지막 판매', 200000, 84, 0, 0, 0.0, 9, '뷰티');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(10, '코오롱 테니스채 남여 세트상', '테니스를 한층 더 굵고 짜릿하게 즐겨세요.', 100000, 98, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(10, '코오롱 테니스채 남여 세트상', '테니스를 한층 더 굵고 짜릿하게 즐겨세요.', 100000, 98, 0, 0, 0.0, 9, '스포츠');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(11, '베이지 소파 3인용', '우리가족 3인이 전부 누울 수 있는 넓고 폭신한 소파', 2000000, 42, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(11, '베이지 소파 3인용', '우리가족 3인이 전부 누울 수 있는 넓고 폭신한 소파', 2000000, 42, 0, 0, 0.0, 9, '홈인테리어');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(12, '아이폰16 블랙 256GB', '설명이 필요없는 아이폰 16 출시', 1120000, 121, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(12, '아이폰16 블랙 256GB', '설명이 필요없는 아이폰 16 출시', 1120000, 121, 0, 0, 0.0, 9, '전자제품');
 INSERT INTO product
-(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id) values
-(13, '홈스카 기스 제거 끝판왕', '기스 제거는 홈스카에서 만나보세요', 15000, 622, 0, 0, 0.0, 9);
+(id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
+(13, '홈스카 기스 제거 끝판왕', '기스 제거는 홈스카에서 만나보세요', 15000, 622, 0, 0, 0.0, 9, '기타');
 
 /** category 샘플 데이터 **/
 INSERT INTO category
-(id, name, description) values
-(1, '패션의류/잡화', null);
+(id, name, description, icon_name) values
+(1, '패션의류/잡화', null, 'CheckroomSharpIcon');
 INSERT INTO category
-(id, name, description) values
-(2, '뷰티', null);
+(id, name, description, icon_name) values
+(2, '뷰티', null, 'FaceIcon');
 INSERT INTO category
-(id, name, description) values
-(3, '식품', null);
+(id, name, description, icon_name) values
+(3, '식품', null, 'FoodIcon');
 INSERT INTO category
-(id, name, description) values
-(4, '주방용품', null);
+(id, name, description, icon_name) values
+(4, '주방용품', null, 'LocalLaundryServiceSharpIcon');
 INSERT INTO category
-(id, name, description) values
-(5, '가전제품', null);
+(id, name, description, icon_name) values
+(5, '가전제품', null, 'LiveTvSharpIcon');
 INSERT INTO category
-(id, name, description) values
-(6, '컴퓨터/노트북', null);
+(id, name, description, icon_name) values
+(6, '컴퓨터/노트북', null, 'LaptopIcon');
 INSERT INTO category
-(id, name, description) values
-(7, '스포츠', null);
+(id, name, description, icon_name) values
+(7, '스포츠', null, 'SportsTennisSharpIcon');
 INSERT INTO category
-(id, name, description) values
-(8, '여행', null);
+(id, name, description, icon_name) values
+(8, '여행', null, 'AirplanemodeActiveSharpIcon');
 INSERT INTO category
-(id, name, description) values
-(9, '홈인테리어', null);
+(id, name, description, icon_name) values
+(9, '홈인테리어', null, 'HomeIcon');
 INSERT INTO category
-(id, name, description) values
-(10, '자동차', null);
+(id, name, description, icon_name) values
+(10, '자동차', null, 'CarIcon');
 INSERT INTO category
-(id, name, description) values
-(11, '전자제품', null);
+(id, name, description, icon_name) values
+(11, '전자제품', null, 'PhoneAndroidSharpIcon');
 INSERT INTO category
-(id, name, description) values
-(12, '기타', null);
+(id, name, description, icon_name) values
+(12, '기타', null, 'CategoryIcon');

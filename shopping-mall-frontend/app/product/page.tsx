@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
-import ProductList from "@/components/seller/ProductList";
-import ProductAdd from "@/components/seller/ProductAdd";
+import ProductList from "@/components/product/ProductList";
+import ProductAdd from "@/components/product/ProductAdd";
 
 const Seller = () => {
   const menuList: string[] = ["판매목록", "상품등록", "판매현황"];

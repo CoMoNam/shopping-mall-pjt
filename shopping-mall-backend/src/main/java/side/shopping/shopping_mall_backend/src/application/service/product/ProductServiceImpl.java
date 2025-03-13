@@ -30,9 +30,9 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Page<Product> getProductList(String name, Pageable pageable) {
         if (name == null || name.isEmpty()) {
-            return productRepository.findBySellerId(loginUserUtil.getCurrentUserId(), pageable);
+            return productRepository.findBySellerIdOrderByCreatedAtDesc(loginUserUtil.getCurrentUserId(), pageable);
         } else {
-            return productRepository.findByNameContainingAndSellerId(name, loginUserUtil.getCurrentUserId(), pageable);
+            return productRepository.findByNameContainingAndSellerIdOrderByCreatedAtDesc(name, loginUserUtil.getCurrentUserId(), pageable);
         }
     }
 

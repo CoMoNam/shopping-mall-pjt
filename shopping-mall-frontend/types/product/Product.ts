@@ -3,6 +3,7 @@ export interface ProductSaveDto {
   description: string;
   price: number | "";
   quantity: number | "";
+  categoryName: string;
 }
 
 export interface ProductListDto {
@@ -15,4 +16,5 @@ export interface ProductListDto {
   reviewCnt: number;
   rating: number;
   sellerId: number;
+  categoryName: string;
 }

@@ -7,8 +7,8 @@ import side.shopping.shopping_mall_backend.src.domain.product.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     // 검색어 없을때
-    Page<Product> findBySellerId(Long sellerId, Pageable pageable);
+    Page<Product> findBySellerIdOrderByCreatedAtDesc(Long sellerId, Pageable pageable);
     // 검색어 있을때
-    Page<Product> findByNameContainingAndSellerId(String name, Long sellerId, Pageable pageable);
+    Page<Product> findByNameContainingAndSellerIdOrderByCreatedAtDesc(String name, Long sellerId, Pageable pageable);
 
 }
