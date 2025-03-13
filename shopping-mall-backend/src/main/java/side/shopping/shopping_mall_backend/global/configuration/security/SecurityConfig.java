@@ -16,7 +16,7 @@ import side.shopping.shopping_mall_backend.global.enums.EndPoint;
 import side.shopping.shopping_mall_backend.global.filter.security.JwtAuthFilter;
 import side.shopping.shopping_mall_backend.global.handler.security.CustomAccessDeniedHandler;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
-import side.shopping.shopping_mall_backend.customer.application.service.security.CustomUserDetailsService;
+import side.shopping.shopping_mall_backend.src.application.service.security.CustomUserDetailsService;
 
 import java.util.List;
 

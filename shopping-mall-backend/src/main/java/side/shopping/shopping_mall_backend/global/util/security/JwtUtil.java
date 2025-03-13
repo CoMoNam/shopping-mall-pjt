@@ -15,7 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.enums.Role;
 import side.shopping.shopping_mall_backend.global.enums.security.TokenStatus;
-import side.shopping.shopping_mall_backend.customer.application.dto.member.CustomUserInfoDto;
+import side.shopping.shopping_mall_backend.src.application.dto.member.CustomUserInfoDto;
 
 import java.security.Key;
 import java.time.ZonedDateTime;

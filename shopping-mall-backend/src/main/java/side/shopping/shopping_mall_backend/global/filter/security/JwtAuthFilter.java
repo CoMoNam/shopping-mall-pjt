@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
-import side.shopping.shopping_mall_backend.customer.application.service.security.CustomUserDetailsService;
+import side.shopping.shopping_mall_backend.src.application.service.security.CustomUserDetailsService;
 
 import java.io.IOException;
 

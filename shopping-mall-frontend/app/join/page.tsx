@@ -1,6 +1,6 @@
 "use client";
 
-import { MemberRepository } from "@/repository/customer/member/MemberRepository";
+import { MemberRepository } from "@/repository/src/member/MemberRepository";
 import "../../styles/globals.css";
 
 import {

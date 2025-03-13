@@ -4,7 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export class AuthRepository {
-  private baseUrl = "/api/global/auth";
+  private baseUrl = "/api/auth";
 
   getJwtInfo = async (jwtRequestInfo: JwtRequestInfo): Promise<LoginUser> => {
     return await apiClient

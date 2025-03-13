@@ -8,17 +8,18 @@ import {
   Typography,
   Alert,
   TextField,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import Image from "next/image";
-import { ProductSaveDto } from "@/types";
-import { ProductRepository } from "@/repository/seller/product/ProductRepository";
+import { Category, ProductSaveDto } from "@/types";
+import { ProductRepository } from "@/repository/src/product/ProductRepository";
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
+import "../../styles/globals.css";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 const ProductAdd = () => {
-  const router = useRouter();
   const productRepository = new ProductRepository();
 
   const [image, setImage] = useState<File | null>(null); // 업로드된 이미지 파일 상태
@@ -29,6 +30,9 @@ const ProductAdd = () => {
   const [price, setPrice] = useState<number | "">(0);
   const [quantity, setQuantity] = useState<number | "">(0);
   const [description, setDescription] = useState<string>("");
+
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
+  const [category, setCategory] = useState<string>("");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]; // 선택된 파일
@@ -69,10 +73,13 @@ const ProductAdd = () => {
           confirmButton: "swal-ok-button", // OK 버튼 커스텀 클래스
         },
       });
+
+      // 저장시 내용 초기화
       setName("");
       setPrice(0);
       setQuantity(0);
       setDescription("");
+      setCategory("");
     }
   };
 
@@ -149,7 +156,6 @@ const ProductAdd = () => {
           paddingY: 10,
         }}
       >
-        {/* 상품명과 재고수량 같은 라인에 배치 */}
         <Box sx={{ display: "flex", gap: 2 }}>
           <TextField
             label="상품명"
@@ -163,6 +169,39 @@ const ProductAdd = () => {
             onChange={(e) => setName(e.target.value)}
             fullWidth
           />
+          <Select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            displayEmpty
+            sx={{
+              width: "180px",
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "black", // 포커스 시 검은색 테두리
+              },
+            }}
+          >
+            <MenuItem value="" disabled>
+              카테고리 선택
+            </MenuItem>
+            {categoryList.map((i) => (
+              <MenuItem
+                key={i.id}
+                value={i.name}
+                // sx={{
+                //   "&.Mui-selected": {
+                //     backgroundColor: "black",
+                //     color: "white",
+                //   },
+                //   "&.Mui-selected:hover": {
+                //     backgroundColor: "#333", // 선택+hover시
+                //   },
+                // }}
+              >
+                {i.name}
+              </MenuItem>
+            ))}
+          </Select>
+
           <TextField
             label="판매가격"
             type="text"

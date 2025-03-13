@@ -1,6 +1,6 @@
 package side.shopping.shopping_mall_backend.util;
 
-import side.shopping.shopping_mall_backend.customer.application.dto.member.JoinRequestDto;
+import side.shopping.shopping_mall_backend.src.application.dto.member.JoinRequestDto;
 
 import java.util.ArrayList;
 import java.util.List;

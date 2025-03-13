@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { FaGoogle } from "react-icons/fa";
 import { SiKakao } from "react-icons/si";
-import { MemberRepository } from "@/repository/customer/member/MemberRepository";
+import { MemberRepository } from "@/repository/src/member/MemberRepository";
 import { LoginRequestDto } from "@/types";
 import { useRouter } from "next/navigation";
 

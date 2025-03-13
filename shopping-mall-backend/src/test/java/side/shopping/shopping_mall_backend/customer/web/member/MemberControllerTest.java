@@ -14,10 +14,10 @@ import side.shopping.shopping_mall_backend.global.enums.EndPoint;
 import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.enums.Role;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
-import side.shopping.shopping_mall_backend.customer.application.dto.member.JoinRequestDto;
-import side.shopping.shopping_mall_backend.customer.application.dto.member.LoginRequestDto;
-import side.shopping.shopping_mall_backend.customer.domain.member.Member;
-import side.shopping.shopping_mall_backend.customer.infrastructure.persistence.member.MemberRepository;
+import side.shopping.shopping_mall_backend.src.application.dto.member.JoinRequestDto;
+import side.shopping.shopping_mall_backend.src.application.dto.member.LoginRequestDto;
+import side.shopping.shopping_mall_backend.src.domain.member.Member;
+import side.shopping.shopping_mall_backend.src.infrastructure.persistence.member.MemberRepository;
 import side.shopping.shopping_mall_backend.util.TestDataUtil;
 
 import java.util.List;

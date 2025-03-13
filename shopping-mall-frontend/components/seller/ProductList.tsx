@@ -1,118 +1,106 @@
+"use client";
 import {
   Box,
   Card,
   CardContent,
   CardMedia,
+  CircularProgress, // MUI 로딩 스피너
   Grid,
+  MenuItem,
+  Pagination,
   Rating,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import "../../styles/globals.css";
-
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  imageUrl: string;
-  rating: number;
-  reviewCount: number;
-}
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: "삼립 돌아온 로켓단 초코롤, 85g, 1개",
-    price: "₩20,000",
-    imageUrl: "/sample_product/product1.png",
-    rating: 4.5,
-    reviewCount: 120,
-  },
-  {
-    id: 2,
-    name: "백설 숯불갈비맛 후랑크, 120g, 1개",
-    price: "₩30,000",
-    imageUrl: "/sample_product/product2.png",
-    rating: 3.8,
-    reviewCount: 95,
-  },
-  {
-    id: 3,
-    name: "LG전자 디오스 오브제컬렉션 832L 양문형 냉장고 메탈",
-    price: "₩25,000",
-    imageUrl: "/sample_product/product3.png",
-    rating: 4.2,
-    reviewCount: 50,
-  },
-  {
-    id: 4,
-    name: "스마트 TV + 삼탠바이미 V1 이동식 거치대 세트",
-    price: "₩15,000",
-    imageUrl: "/sample_product/product4.png",
-    rating: 4.8,
-    reviewCount: 200,
-  },
-  {
-    id: 5,
-    name: "게이밍PC i5 13400F RTX4060 조립컴퓨터",
-    price: "₩20,000",
-    imageUrl: "/sample_product/product5.png",
-    rating: 4.5,
-    reviewCount: 120,
-  },
-  {
-    id: 6,
-    name: "베이직스 2024 베이직북 16 N-시리즈 N95",
-    price: "₩30,000",
-    imageUrl: "/sample_product/product6.png",
-    rating: 3.8,
-    reviewCount: 95,
-  },
-  {
-    id: 7,
-    name: "에어로케이 제주도 항공권 특가 항공권 제주 항공권",
-    price: "₩25,000",
-    imageUrl: "/sample_product/product7.png",
-    rating: 4.2,
-    reviewCount: 50,
-  },
-  {
-    id: 8,
-    name: "로얄리노 대용량 이불 옷 패브릭 정리함",
-    price: "₩15,000",
-    imageUrl: "/sample_product/product8.png",
-    rating: 4.8,
-    reviewCount: 200,
-  },
-];
+import { useEffect, useRef, useState } from "react";
+import { ProductRepository } from "@/repository/src/product/ProductRepository";
+import { ProductListDto } from "@/types";
 
 const ProductList = () => {
+  const [productList, setProductList] = useState<ProductListDto[]>([]);
+  const [page, setPage] = useState(0); // 현재 페이지 (0부터 시작)
+  const [size, setSize] = useState<string | number>(10); // 한 번에 가져올 데이터 개수
+  const [totalPages, setTotalPages] = useState(0);
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  ); // Timeout 저장
+  const [loading, setLoading] = useState(false); // 로딩 상태
+  const prevSearchKeyword = useRef<string | null>(null); // 이전 검색어를 저장하는 ref
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value - 1); // Pagination은 1부터 시작하므로 -1 해줌
+  };
+
+  useEffect(() => {
+    const getProductList = async () => {
+      const productRepository = new ProductRepository();
+      const response = await productRepository.getProductList(
+        searchKeyword,
+        page,
+        size
+      );
+      setProductList(response.content); // 결과를 상태에 저장
+      setTotalPages(response.totalPages); // 페이지 수 업데이트
+      setLoading(false); // 로딩 종료
+    };
+
+    if (typingTimeout) {
+      clearTimeout(typingTimeout); // 이전 타이머 클리어
+    }
+
+    // **searchKeyword가 변할 때만 페이지를 초기화**
+    if (prevSearchKeyword.current !== searchKeyword) {
+      setPage(0); // 페이지 초기화
+    }
+
+    if (searchKeyword) {
+      setLoading(true); // 로딩 시작
+      const timeout = setTimeout(() => {
+        getProductList();
+      }, 1500);
+      setTypingTimeout(timeout); // 새로운 타이머 저장
+    } else {
+      getProductList();
+    }
+
+    // 현재 searchKeyword를 ref에 저장
+    prevSearchKeyword.current = searchKeyword;
+  }, [searchKeyword, page, size]);
+
   return (
     <>
-      <Box sx={{ paddingX: "5%", paddingY: 1 }}>
-        <Box sx={{ paddingY: 5, display: "flex", justifyContent: "left" }}>
+      <Box sx={{ paddingX: "5%", paddingY: 1, width: "100%" }}>
+        <Box
+          sx={{
+            paddingY: 5,
+            display: "flex",
+            justifyContent: "space-between", // 좌우 정렬
+            alignItems: "center",
+          }}
+        >
+          {/* 검색 필드 */}
           <TextField
             variant="outlined"
             placeholder="물품을 검색해보세요"
             sx={{
-              width: "30%",
+              width: "50%", // 검색창 넓이 증가
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "black", // 기본 테두리 색상 (포커스 안될 때)
+                  borderColor: "black",
                 },
                 "&:hover fieldset": {
-                  borderColor: "black", // hover 시 테두리 색상
+                  borderColor: "black",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "black", // 포커스 시 테두리 색상
+                  borderColor: "black",
                 },
-              },
-              "& .MuiInputLabel-root": {
-                color: "black", // 기본 레이블 색상
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "black", // 포커스 상태에서 레이블 색상
               },
             }}
             InputProps={{
@@ -122,43 +110,100 @@ const ProductList = () => {
                 </Box>
               ),
             }}
+            onChange={(e) => setSearchKeyword(e.target.value)}
           />
+
+          {/* 페이징 UI */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "auto", // 오른쪽으로 붙이기
+            }}
+          >
+            <Pagination
+              count={totalPages}
+              defaultPage={1}
+              page={page + 1}
+              onChange={handlePageChange}
+              sx={{ marginRight: 2 }} // 페이징 간 여백
+            />
+            <Select
+              value={size} // 현재 페이지 크기
+              sx={{ width: 150 }}
+              size="small"
+              onChange={(e) => setSize(e.target.value)}
+            >
+              <MenuItem value={10}>10개씩 보기</MenuItem>
+              <MenuItem value={20}>20개씩 보기</MenuItem>
+              <MenuItem value={30}>30개씩 보기</MenuItem>
+            </Select>
+          </Box>
         </Box>
-        <Grid container spacing={2}>
-          {products.map((product) => (
-            <Grid item xs={12} sm={6} md={2.4} key={product.id}>
-              <Card
-                sx={{
-                  textAlign: "center",
-                  cursor: "pointer",
-                  transition: "all 0.3s ease-in-out",
-                  "&:hover": {
-                    color: "inherit",
-                    transform: "scale(1.1)",
-                    animation: "shake 0.5s ease-in-out",
-                  },
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={product.imageUrl}
-                  alt={product.name}
-                />
-                <CardContent>
-                  <Typography variant="h6">{product.name}</Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {product.price}
-                  </Typography>
-                  <Rating value={product.rating} readOnly />
-                  <Typography variant="body2" color="textSecondary">
-                    {product.reviewCount} 후기
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+
+        {/* 로딩 상태일 때 로딩 스피너 표시 */}
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "300px", // 로딩 화면 높이 설정
+            }}
+          >
+            <CircularProgress /> {/* 원형 로딩 스피너 */}
+          </Box>
+        ) : (
+          <Grid container spacing={2}>
+            {productList?.map((product) => (
+              <Grid item xs={12} sm={6} md={2.4} key={product.id}>
+                <Card
+                  sx={{
+                    textAlign: "center",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease-in-out",
+                    height: "380px",
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image="/ready_image.jpg"
+                    alt={product.name}
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        overflow: "hidden", // 넘치는 텍스트 숨기기
+                        textOverflow: "ellipsis", // 줄임표 표시
+                        display: "-webkit-box", // flex 기반의 박스 모델
+                        WebkitLineClamp: 2, // 최대 두 줄 표시
+                        WebkitBoxOrient: "vertical", // 수직 정렬 설정
+                        height: "70px",
+                      }}
+                    >
+                      {product.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      sx={{
+                        height: "30px",
+                      }}
+                    >
+                      {product.price.toLocaleString("ko-KR")}
+                    </Typography>
+                    <Rating value={product.rating} readOnly />
+                    <Typography variant="body2" color="textSecondary">
+                      {product.reviewCnt} 후기
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Box>
     </>
   );
