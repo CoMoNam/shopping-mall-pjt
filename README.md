@@ -23,4 +23,5 @@
 
 - 회원가입
 - Login / Logout (Spring Security Jwt Token) , XSS 공격 방지 HttpOnly 쿠키 방식
-- 상품 관리 (상품 등록, 조회, 통계 차트) // 진행중
+- 상품 관리 (상품 등록, 조회 등)
+- ELK 검색 엔진을 통한 상품 검색 구현 (진행중)
