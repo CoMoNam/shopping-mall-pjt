@@ -12,6 +12,8 @@ import side.shopping.shopping_mall_backend.src.domain.product.Product;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSaveDto;
 import side.shopping.shopping_mall_backend.src.infrastructure.persistence.product.ProductRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional

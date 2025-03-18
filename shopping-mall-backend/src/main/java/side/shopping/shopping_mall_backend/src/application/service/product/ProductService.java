@@ -6,6 +6,8 @@ import side.shopping.shopping_mall_backend.src.application.dto.product.ProductUp
 import side.shopping.shopping_mall_backend.src.domain.product.Product;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSaveDto;
 
+import java.util.List;
+
 /*
     상품 인터페이스
  */
@@ -14,4 +16,5 @@ public interface ProductService {
     Page<Product> getProductList(String name, Pageable pageable);
     void delete(Long id);
     void update(ProductUpdateDto productUpdateDto);
+
 }

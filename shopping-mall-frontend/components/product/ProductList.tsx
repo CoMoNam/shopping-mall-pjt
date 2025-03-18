@@ -87,7 +87,7 @@ const ProductList = () => {
     }
 
     prevSearchKeyword.current = searchKeyword;
-  }, [searchKeyword, page, size, typingTimeout, reloadTrigger]);
+  }, [searchKeyword, page, size, reloadTrigger]);
 
   const handleProductClick = (product: ProductListDto) => {
     setSelectedProduct(product);

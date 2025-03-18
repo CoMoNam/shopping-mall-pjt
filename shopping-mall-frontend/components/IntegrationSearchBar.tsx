@@ -1,14 +1,32 @@
+"use client";
+
 import { Box, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const IntegrationSearchBar = () => {
+  const router = useRouter();
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearch = () => {
+    router.push(`/search?searchText=${searchText}`);
+  };
+
   return (
     <>
       {/* 검색창 */}
       <Box sx={{ paddingY: 5, display: "flex", justifyContent: "center" }}>
         <TextField
           variant="outlined"
-          placeholder="어떤 서비스가 필요하신가요?"
+          placeholder="어떤 상품을 찾으세요?"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && searchText.trim() !== "") {
+              handleSearch();
+            }
+          }}
           sx={{
             width: "30%",
             "& .MuiOutlinedInput-root": {
@@ -30,9 +48,18 @@ const IntegrationSearchBar = () => {
             },
           }}
           InputProps={{
-            startAdornment: (
-              <Box component="span" sx={{ marginRight: 1 }}>
-                <SearchIcon />
+            endAdornment: (
+              <Box component="span" sx={{ marginLeft: 1 }}>
+                <SearchIcon
+                  onClick={() => {
+                    if (searchText.trim() !== "") {
+                      handleSearch();
+                    }
+                  }}
+                  sx={{
+                    cursor: "pointer",
+                  }}
+                />
               </Box>
             ),
           }}

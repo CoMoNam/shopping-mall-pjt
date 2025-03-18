@@ -36,6 +36,7 @@ dependencies {
 	implementation("org.modelmapper:modelmapper:3.1.1")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-mysql")
+	implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 
 	compileOnly("org.projectlombok:lombok")
 

@@ -67,13 +67,13 @@ INSERT INTO product
 (5, '게이밍PC i5 13400F RTX4060 조립컴퓨터', '가성비 좋은 컴퓨터 게이밍 컴퓨터', 2000000, 42, 0, 0, 0.0, 9, '컴퓨터/노트북');
 INSERT INTO product
 (id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
-(6, '베이직스 2024 베이직북 16 N-시리즈 N95', '가성비 좋은 노트북', 1000000, 42, 0, 0, 0.0, 9, '컴퓨터/노트북');
+(6, '베이직스 2024 베이직북 16 N-시리즈 N95', '가성비 좋은 노트북', 1000000, 82, 0, 0, 0.0, 9, '컴퓨터/노트북');
 INSERT INTO product
 (id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
-(7, '에어로케이 제주도 항공권 특가 항공권 제주 항공권', '얼른 떠나자', 500000, 42, 0, 0, 0.0, 9, '여행');
+(7, '에어로케이 제주도 항공권 특가 항공권 제주 항공권', '얼른 떠나자', 500000, 71, 0, 0, 0.0, 9, '여행');
 INSERT INTO product
 (id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
-(8, '로얄리노 대용량 이불 옷 패브릭 정리함', '옷 이불 모든것들을 한번에', 20000, 42, 0, 0, 0.0, 9, '홈인테리어');
+(8, '로얄리노 대용량 이불 옷 패브릭 정리함', '옷 이불 모든것들을 한번에', 20000, 64, 0, 0, 0.0, 9, '홈인테리어');
 INSERT INTO product
 (id, name, description, price, quantity, total_score, review_cnt, rating, seller_id, category_name) values
 (9, '샤넬 립스틱 한정판 시즌-2025', '샤넬 립스틱 한정판 마지막 판매', 200000, 84, 0, 0, 0.0, 9, '뷰티');

@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import side.shopping.shopping_mall_backend.global.enums.Comments;
@@ -14,7 +13,6 @@ import side.shopping.shopping_mall_backend.src.application.dto.product.ProductUp
 import side.shopping.shopping_mall_backend.src.application.service.product.ProductService;
 import side.shopping.shopping_mall_backend.src.domain.product.Product;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSaveDto;
-
 
 @RestController
 @RequestMapping(value = EndPoint.PRODUCT_CONTROLLER)
@@ -50,4 +48,5 @@ public class ProductController {
         productService.update(productUpdateDto);
         return ResponseEntity.ok(Comments.TRANSACTION_SUCCESS.getDescriptionEn());
     }
+
 }

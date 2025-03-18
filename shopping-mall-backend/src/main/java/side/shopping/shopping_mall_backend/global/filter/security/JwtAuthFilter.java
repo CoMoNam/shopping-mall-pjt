@@ -66,7 +66,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         // 2. 토큰이 존재하고 유효한지 확인
         if (token != null && jwtUtil.isValidToken(token)) {
             Long userId = jwtUtil.getUserId(token);
-
             // 3. 유저 정보 로드
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(userId.toString());
             if (userDetails != null) {
