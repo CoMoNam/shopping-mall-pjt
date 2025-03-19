@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum Comments {
     // 공통
     TRANSACTION_SUCCESS("TRANSACTION_SUCCESS", "성공적으로 처리 되었습니다.", "transaction is successfully completed"),
+    TRANSACTION_FAIL("TRANSACTION_FAIL", "시스템 오류 발생", "transaction is failed"),
 
     // 권한
     UNAUTHORIZED("UNAUTHORIZED", "권한이 없음", "No Authorities"),

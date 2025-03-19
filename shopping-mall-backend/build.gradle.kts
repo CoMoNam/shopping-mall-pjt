@@ -29,14 +29,19 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation") // 유효성검증
+
 	implementation ("org.mapstruct:mapstruct:1.5.5.Final")
+	implementation("org.modelmapper:modelmapper:3.1.1")
+
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
-	implementation("org.modelmapper:modelmapper:3.1.1")
+
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-mysql")
+
 	implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
+	implementation("co.elastic.clients:elasticsearch-java:8.11.1")
 
 	compileOnly("org.projectlombok:lombok")
 

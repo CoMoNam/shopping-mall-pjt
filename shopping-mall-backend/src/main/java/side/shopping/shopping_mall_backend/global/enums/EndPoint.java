@@ -10,5 +10,6 @@ public class EndPoint {
     public static final String PRODUCT_CONTROLLER = "/api/product";
     public static final String CATEGORY_CONTROLLER = "/api/category";
     public static final String MAIN_CONTROLLER = "/api/main";
+    public static final String PRODUCT_ELK_CONTROLLER = "/api/product/elk";
 
 }

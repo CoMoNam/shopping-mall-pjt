@@ -1,18 +1,21 @@
 package side.shopping.shopping_mall_backend.src.application.service.product;
 
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.util.security.LoginUserUtil;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductUpdateDto;
 import side.shopping.shopping_mall_backend.src.application.mapper.product.ProductMapper;
+import side.shopping.shopping_mall_backend.src.domain.elasticsearch.product.ProductElkDocument;
 import side.shopping.shopping_mall_backend.src.domain.product.Product;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSaveDto;
 import side.shopping.shopping_mall_backend.src.infrastructure.persistence.product.ProductRepository;
 
-import java.util.List;
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -20,13 +23,27 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService{
     private final ProductRepository productRepository;
     private final LoginUserUtil loginUserUtil;
+    private final ElasticsearchClient elasticsearchClient;
+
 
     //상품등록
     @Override
-    public void save(ProductSaveDto productDto) {
-        Product product = ProductMapper.INSTANCE.toProduct(productDto);
-        product.setSellerId(loginUserUtil.getCurrentUserId());
-        productRepository.save(product);
+    public void save(ProductSaveDto productDto){
+        try {
+            Product product = ProductMapper.INSTANCE.toProduct(productDto);
+            product.setSellerId(loginUserUtil.getCurrentUserId());
+            productRepository.save(product);
+
+            ProductElkDocument elkDoc = ProductElkDocument.from(product);
+            elasticsearchClient.index(i -> i
+                    .index("products")
+                    .id(product.getId().toString())
+                    .document(elkDoc)
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(Comments.TRANSACTION_FAIL.getDescriptionEn(), e);
+        }
+
     }
 
     //내 상품 목록조회
@@ -42,13 +59,34 @@ public class ProductServiceImpl implements ProductService{
     //해당 상품 삭제
     @Override
     public void delete(Long id) {
-        productRepository.deleteById(id);
+        try {
+            productRepository.deleteById(id);
+
+            elasticsearchClient.delete(d -> d
+                    .index("products")
+                    .id(id.toString())
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(Comments.TRANSACTION_FAIL.getDescriptionEn(), e);
+        }
     }
 
     @Override
     public void update(ProductUpdateDto productUpdateDto) {
-        Product product = ProductMapper.INSTANCE.toProduct(productUpdateDto);
-        productRepository.save(product);
+        try {
+            Product product = ProductMapper.INSTANCE.toProduct(productUpdateDto);
+            productRepository.save(product);
+
+            ProductElkDocument elkDoc = ProductElkDocument.from(product);
+            elasticsearchClient.index(i -> i
+                    .index("products")
+                    .id(product.getId().toString())
+                    .document(elkDoc)
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(Comments.TRANSACTION_FAIL.getDescriptionEn(), e);
+        }
+
     }
 
     //평점 계산

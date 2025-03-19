@@ -22,3 +22,8 @@ server:
 flyway-custom:
   clean_trigger: true
   migrate_trigger: true
+
+elasticsearch:
+  hostname: "localhost"
+  port: 9200
+  schema: "http"
