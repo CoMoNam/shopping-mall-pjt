@@ -17,10 +17,14 @@ public class ProductElkService {
 
     private final ElasticsearchClient elasticsearchClient;
 
-    public List<ProductElkDocument> search(String searchText) throws IOException {
+    public List<ProductElkDocument> search(String searchText, int page) throws IOException {
+        int size = 12;
+        int from = page * size;
+
         SearchResponse<ProductElkDocument> response = elasticsearchClient.search(s -> s
                         .index("products")
-                        .size(12)
+                        .from(from)
+                        .size(size)
                         .query(q -> q
                                 .matchPhrasePrefix(m -> m
                                         .field("name")

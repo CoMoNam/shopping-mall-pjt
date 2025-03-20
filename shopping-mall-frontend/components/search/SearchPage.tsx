@@ -13,12 +13,16 @@ export default async function SearchPage({
   const cookie = headersList.get("cookie") || "";
 
   const searchRepository = new SearchRepository();
-  const result = await searchRepository.getElkProductList(cookie, searchValue);
+  const result = await searchRepository.getElkProductList(
+    cookie,
+    searchValue,
+    0
+  );
   const elkProductList: ProductListDto[] = result;
   return (
     <>
       <IntegrationSearchBar searchValue={searchValue} />
-      <SearchResult elkProductList={elkProductList} />
+      <SearchResult elkProductList={elkProductList} searchValue={searchValue} />
     </>
   );
 }

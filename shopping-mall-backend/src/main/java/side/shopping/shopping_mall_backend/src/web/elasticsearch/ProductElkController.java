@@ -19,7 +19,7 @@ public class ProductElkController {
     private final ProductElkService productElkService;
 
     @GetMapping
-    public List<ProductElkDocument> search(@RequestParam String searchText) throws IOException {
-        return productElkService.search(searchText);
+    public List<ProductElkDocument> search(@RequestParam String searchText, int page) throws IOException {
+        return productElkService.search(searchText, page);
     }
 }
