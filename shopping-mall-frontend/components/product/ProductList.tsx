@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
@@ -30,9 +32,10 @@ const ProductList = () => {
   const [size, setSize] = useState<string | number>(10);
   const [totalPages, setTotalPages] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
-    null
-  );
+  // const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
+  //   null
+  // );
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [loading, setLoading] = useState(false);
   const prevSearchKeyword = useRef<string | null>(null);
 
@@ -68,8 +71,8 @@ const ProductList = () => {
       setLoading(false);
     };
 
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
     }
 
     if (prevSearchKeyword.current !== searchKeyword) {
@@ -81,7 +84,7 @@ const ProductList = () => {
       const timeout = setTimeout(() => {
         getProductList();
       }, 1500);
-      setTypingTimeout(timeout);
+      typingTimeoutRef.current = timeout;
     } else {
       getProductList();
     }

@@ -5,9 +5,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const IntegrationSearchBar = () => {
+const IntegrationSearchBar = ({ searchValue }: { searchValue: string }) => {
   const router = useRouter();
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState(searchValue || "");
 
   const handleSearch = () => {
     router.push(`/search?searchText=${searchText}`);

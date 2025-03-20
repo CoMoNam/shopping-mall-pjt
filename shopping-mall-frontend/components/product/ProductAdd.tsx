@@ -93,6 +93,8 @@ const ProductAdd = () => {
     callGetCategoryList();
   }, []);
 
+  console.log(image);
+
   return (
     <Container maxWidth="xl" sx={{ paddingY: 1, marginTop: 8 }}>
       <Box

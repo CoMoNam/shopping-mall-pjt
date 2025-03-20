@@ -1,9 +1,8 @@
 package side.shopping.shopping_mall_backend.src.domain.elasticsearch.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Id;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.elasticsearch.annotations.Document;
 import side.shopping.shopping_mall_backend.src.domain.product.Product;
 
@@ -11,6 +10,8 @@ import side.shopping.shopping_mall_backend.src.domain.product.Product;
 @Setter
 @Document(indexName = "products")
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductElkDocument {
     @Id
     private Long id;
@@ -18,10 +19,14 @@ public class ProductElkDocument {
     private String description;
     private int price;
     private int quantity;
+    @JsonProperty("total_score")
     private int totalScore;
+    @JsonProperty("review_cnt")
     private int reviewCnt;
     private double rating;
+    @JsonProperty("seller_id")
     private Long sellerId;
+    @JsonProperty("category_name")
     private String categoryName;
 
     public static ProductElkDocument from (Product product) {

@@ -20,8 +20,9 @@ public class ProductElkService {
     public List<ProductElkDocument> search(String searchText) throws IOException {
         SearchResponse<ProductElkDocument> response = elasticsearchClient.search(s -> s
                         .index("products")
+                        .size(12)
                         .query(q -> q
-                                .match(m -> m
+                                .matchPhrasePrefix(m -> m
                                         .field("name")
                                         .query(searchText)
                                 )

@@ -13,7 +13,7 @@ const Main = async () => {
   const recentProductList: ProductListDto[] = response;
   return (
     <>
-      <IntegrationSearchBar />
+      <IntegrationSearchBar searchValue={""} />
       <Category />
       <RecentProducts recentProductList={recentProductList} />
     </>
