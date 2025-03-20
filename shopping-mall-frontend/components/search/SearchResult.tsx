@@ -192,6 +192,7 @@ const SearchResult = ({ searchValue }: Props) => {
             ) : (
               <Grid item xs={12}>
                 <Card
+                  elevation={0}
                   sx={{
                     height: "700px",
                     display: "flex",

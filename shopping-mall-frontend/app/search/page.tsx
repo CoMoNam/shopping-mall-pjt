@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-// ✅ ssr: false → 완전히 CSR 처리
+// ssr: false → 완전히 CSR 처리
 const SearchPage = dynamic(() => import("@/components/search/SearchPage"), {
   ssr: false,
 });

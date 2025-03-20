@@ -4,6 +4,7 @@ public class EndPoint {
     /** Global API */
     public static final String AUTHORITY_CONTROLLER = "/api/authority";
     public static final String AUTH_CONTROLLER = "/api/auth";
+    public static final String POPULAR_KEYWORD_CONTROLLER = "/api/popular_keyword";
 
     /** Src API */
     public static final String MEMBER_CONTROLLER = "/api/member";

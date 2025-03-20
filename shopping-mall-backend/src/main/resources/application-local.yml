@@ -7,6 +7,10 @@ spring:
   flyway:
     validateOnMigrate: false
     cleanDisabled: false
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 jwt:
   secret-key: "c3RhY2t5c3RyYW5nZ2VvZnJlZW5rZXl0aGVyZXNlY3JldGVzYXJvd3Bpb25sb3diYXNlZGtleQ"
