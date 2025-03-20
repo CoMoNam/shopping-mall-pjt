@@ -9,7 +9,6 @@ export class SearchRepository {
     searchText: string,
     page: number
   ) => {
-    console.log("====>>> SSR IN");
     return await apiSsr(cookie)
       .get(`${this.baseUrl}`, {
         params: {
@@ -27,7 +26,6 @@ export class SearchRepository {
 
   // 상품 elk 추가 데이터
   getMoreElkProductList = async (searchText: string, page: number) => {
-    console.log("====>>> CSR IN");
     return await apiClient
       .get(`${this.baseUrl}`, {
         params: {

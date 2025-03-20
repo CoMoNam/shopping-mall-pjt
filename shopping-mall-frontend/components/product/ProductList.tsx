@@ -297,6 +297,9 @@ const ProductList = () => {
           sx={{}}
           maxWidth="sm"
           fullWidth={true}
+          disableEnforceFocus
+          disableAutoFocus
+          disableRestoreFocus
         >
           <DialogTitle>제품 상세</DialogTitle>
           <DialogContent>
