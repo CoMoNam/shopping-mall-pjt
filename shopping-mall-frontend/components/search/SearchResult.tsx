@@ -6,7 +6,6 @@ import {
   Box,
   Card,
   CardContent,
-  CardMedia,
   Grid,
   Rating,
   Typography,
