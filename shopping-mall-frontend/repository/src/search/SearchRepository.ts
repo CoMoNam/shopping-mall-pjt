@@ -4,7 +4,7 @@ export class SearchRepository {
   private baseUrl = "/api/elk/product";
 
   // 상품 elk 최초 데이터
-  getElkProductList = async (
+  getSsrElkProductList = async (
     cookie: string,
     searchText: string,
     page: number
@@ -25,7 +25,7 @@ export class SearchRepository {
   };
 
   // 상품 elk 추가 데이터
-  getMoreElkProductList = async (searchText: string, page: number) => {
+  getCsrElkProductList = async (searchText: string, page: number) => {
     return await apiClient
       .get(`${this.baseUrl}`, {
         params: {

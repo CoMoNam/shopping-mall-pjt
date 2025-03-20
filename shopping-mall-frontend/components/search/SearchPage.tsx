@@ -1,28 +1,15 @@
+"use client";
 import IntegrationSearchBar from "@/components/IntegrationSearchBar";
 import SearchResult from "@/components/search/SearchResult";
-import { SearchRepository } from "@/repository/src/search/SearchRepository";
-import { ProductListDto } from "@/types";
-import { headers } from "next/headers";
+import { useSearchParams } from "next/navigation";
 
-export default async function SearchPage({
-  searchValue,
-}: {
-  searchValue: string;
-}) {
-  const headersList = await headers();
-  const cookie = headersList.get("cookie") || "";
-
-  const searchRepository = new SearchRepository();
-  const result = await searchRepository.getElkProductList(
-    cookie,
-    searchValue,
-    0
-  );
-  const elkProductList: ProductListDto[] = result;
+export default function SearchPage() {
+  const searchParams = useSearchParams();
+  const searchText = searchParams.get("searchText") ?? "";
   return (
     <>
-      <IntegrationSearchBar searchValue={searchValue} />
-      <SearchResult elkProductList={elkProductList} searchValue={searchValue} />
+      <IntegrationSearchBar searchValue={searchText} />
+      <SearchResult searchValue={searchText} />
     </>
   );
 }
