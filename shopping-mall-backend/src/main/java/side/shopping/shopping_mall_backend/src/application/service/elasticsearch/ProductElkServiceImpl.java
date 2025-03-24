@@ -30,12 +30,28 @@ public class ProductElkServiceImpl implements ProductElkService {
                             .index("products")
                             .from(from)
                             .size(size)
+//                            .query(q -> q
+//                                    .matchPhrasePrefix(m -> m
+//                                            .field("name")
+//                                            .query(searchText)
+//                                    )
+//                            ),
                             .query(q -> q
-                                    .matchPhrasePrefix(m -> m
+                                    .match(m -> m
                                             .field("name")
                                             .query(searchText)
                                     )
                             ),
+
+//                            .query(q -> q.bool(b -> {
+//                                for (String keyword : keywords) {
+//                                    b.must(m -> m.match(mq -> mq
+//                                            .field("name")
+//                                            .query(keyword)
+//                                    ));
+//                                }
+//                                return b;
+//                            })),
                     ProductElkDocument.class
             );
 
