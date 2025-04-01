@@ -1,17 +1,25 @@
 import { apiSsr } from "@/util/AxiosUtil";
+import { AxiosError } from "axios";
 
 export class MainRepository {
   private baseUrl = "/api/main";
 
   // 최근 상품 목록
   getRecentProductList = async (cookie: string) => {
-    return await apiSsr(cookie)
-      .get(`${this.baseUrl}/recent`)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
+    try {
+      const response = await apiSsr(cookie).get(`${this.baseUrl}/recent`);
+      return response.data;
+    } catch (error: unknown) {
+      const axiosError = error as AxiosError;
+  
+      if (axiosError.response && axiosError.response.data) {
+        return axiosError.response.data;
+      } else {
+        return {
+          message: 'Unknown error occurred',
+          detail: axiosError.message,
+        };
+      }
+    }
   };
 }

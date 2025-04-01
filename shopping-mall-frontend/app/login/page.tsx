@@ -3,6 +3,7 @@
 import "../../styles/globals.css";
 
 import React, { useState } from "react";
+import { ethers } from "ethers";
 import {
   Box,
   Button,
@@ -13,9 +14,11 @@ import {
 } from "@mui/material";
 import { FaGoogle } from "react-icons/fa";
 import { SiKakao } from "react-icons/si";
+import { GiFox } from "react-icons/gi";
 import { MemberRepository } from "@/repository/src/member/MemberRepository";
 import { LoginRequestDto } from "@/types";
 import { useRouter } from "next/navigation";
+import { apiNodeClient } from "@/util/AxiosUtil";
 
 const Login = () => {
   const router = useRouter();
@@ -30,6 +33,10 @@ const Login = () => {
       password: password,
     };
     await memberRepository.loginMember(loginRequestDto);
+  };
+
+  const walletLoginButtonClick = async (address: string) => {
+    await memberRepository.walletLogin(address);
   };
 
   return (
@@ -182,7 +189,81 @@ const Login = () => {
             </Button>
           </Typography>
 
-          {/* 구글, 카카오 로그인 버튼 */}
+          {/* 기타 로그인 버튼 */}
+          <Button
+            variant="contained"
+            size="large"
+            sx={{
+              marginTop: 2,
+              backgroundColor: "#f6851b", // 메타마스크 오렌지
+              color: "white",
+              "&:hover": {
+                backgroundColor: "#e2761b",
+              },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onClick={async () => {
+              if (typeof window !== "undefined" && window.ethereum) {
+                try {
+                  // 1. 지갑 연결 시작
+                  const accounts = await window.ethereum.request({
+                    method: "eth_requestAccounts",
+                  });
+
+                  if (!Array.isArray(accounts) || accounts.length === 0) {
+                    console.warn("연결된 지갑이 없습니다.");
+                    return;
+                  }
+
+                  const walletAddress = accounts[0];
+
+                  // 2. 로그인 요청
+
+                  // spring server 에 메시지 요청
+                  const messageResponse = await apiNodeClient.post(
+                    "/api/message",
+                    {
+                      address: walletAddress,
+                    }
+                  );
+                  // 받아온 메시지
+                  const message = messageResponse.data.message;
+
+                  // 메시지 서명
+                  const provider = new ethers.BrowserProvider(window.ethereum);
+                  const signer = await provider.getSigner();
+                  const signature = await signer.signMessage(message);
+
+                  const verifySignature = await apiNodeClient.post(
+                    "/api/verify",
+                    {
+                      address: walletAddress,
+                      message: message,
+                      signature,
+                    }
+                  );
+
+                  const { valid } = await verifySignature.data;
+
+                  if (!valid) {
+                    alert("서명 검증 실패");
+                    return;
+                  }
+
+                  await walletLoginButtonClick(walletAddress);
+                } catch (error) {
+                  console.error("MetaMask 로그인 오류:", error);
+                }
+              } else {
+                alert("MetaMask가 설치되어 있지 않습니다.");
+              }
+            }}
+          >
+            <GiFox style={{ marginRight: 10 }} />
+            메타마스크 로그인
+          </Button>
           <Button
             variant="contained"
             size="large"

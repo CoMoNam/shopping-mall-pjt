@@ -36,8 +36,9 @@ public class SecurityConfig {
     private static final String[] AUTH_WHITELIST = {
             EndPoint.MEMBER_CONTROLLER + "/join",
             EndPoint.MEMBER_CONTROLLER + "/login",
+            EndPoint.MEMBER_CONTROLLER + "/wallet-login",
             EndPoint.AUTH_CONTROLLER + "/logout",
-            EndPoint.AUTH_CONTROLLER + "/get_token_info"
+            EndPoint.AUTH_CONTROLLER + "/get_token_info",
     };
 
 

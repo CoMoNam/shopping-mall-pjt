@@ -10,4 +10,5 @@ import side.shopping.shopping_mall_backend.src.application.dto.member.LoginReque
 public interface MemberService {
     void join(JoinRequestDto joinRequestDto);
     ResponseEntity<Void> login(LoginRequestDto loginRequestDto);
+    ResponseEntity<Void> walletLogin(String address);
 }

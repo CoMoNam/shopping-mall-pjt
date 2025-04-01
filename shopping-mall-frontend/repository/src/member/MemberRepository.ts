@@ -3,12 +3,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import "../../../styles/globals.css";
 import { apiClient } from "@/util/AxiosUtil";
-import { useRouter } from "next/navigation";
 
 export class MemberRepository {
   private baseUrl = "/api/member";
-
-  router = useRouter();
 
   // 회원가입
   joinMember = async (joinRequestDto: JoinRequestDto): Promise<string> => {
@@ -24,7 +21,7 @@ export class MemberRepository {
             confirmButton: "swal-ok-button", // OK 버튼 커스텀 클래스
           },
           preConfirm: () => {
-            this.router.push("/login");
+            window.location.href = "/login";
           },
         });
         return response.data; // 서버의 응답 데이터를 반환
@@ -53,10 +50,41 @@ export class MemberRepository {
       });
   };
 
-  // 로그인
+  // 로그인 : 일반
   loginMember = async (loginRequestDto: LoginRequestDto): Promise<boolean> => {
     return await apiClient
       .post(`${this.baseUrl}/login`, loginRequestDto)
+      .then((response) => {
+        window.location.href = "/";
+        return response.data;
+      })
+      .catch((error) => {
+        let responseErrorData = "";
+
+        if (axios.isAxiosError(error) && error.response) {
+          if (Array.isArray(error.response.data)) {
+            responseErrorData = error.response.data.join("<br>");
+          } else {
+            responseErrorData = error.response.data;
+          }
+          Swal.fire({
+            icon: "error",
+            html: responseErrorData,
+            showConfirmButton: false,
+            timer: 2000,
+            customClass: {
+              title: "swal-error-title",
+            },
+          });
+          return error.response.data;
+        }
+      });
+  };
+
+  // 로그인 : wallet
+  walletLogin = async (address: string): Promise<boolean> => {
+    return await apiClient
+      .post(`${this.baseUrl}/wallet-login`, { address })
       .then((response) => {
         window.location.href = "/";
         return response.data;

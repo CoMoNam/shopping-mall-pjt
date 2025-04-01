@@ -1,5 +1,6 @@
 package side.shopping.shopping_mall_backend.global.filter.security;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -7,13 +8,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
+import side.shopping.shopping_mall_backend.global.enums.Role;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
+import side.shopping.shopping_mall_backend.src.application.dto.member.CustomUserInfoDto;
 import side.shopping.shopping_mall_backend.src.application.service.security.CustomUserDetailsService;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -24,37 +29,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     /**
      * JWT 검증 필터 수행
      */
-//    @Override
-//    protected void doFilterInternal(final HttpServletRequest request,
-//                                    final HttpServletResponse response,
-//                                    final FilterChain filterChain) throws ServletException, IOException {
-//        String authorizationHeader = request.getHeader("Authorization");
-//
-//        //JWT 헤더가 있을 경우
-//        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-//            String token = authorizationHeader.substring(7);
-//
-//            //JWT 유효성 검증
-//            if (jwtUtil.isValidToken(token)) {
-//                Long userId = jwtUtil.getUserId(token);
-//
-//                //유저와 토큰 일치 시 userDetails 생성
-//                UserDetails userDetails = customUserDetailsService.loadUserByUsername(
-//                        userId.toString());
-//                if (userDetails != null) {
-//                    //UserDetails, Password, Role -> 접근 권한 인증 Token 생성
-//                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-//                            userDetails, null, userDetails.getAuthorities());
-//
-//                    //현재 Request의 Security Context에 접근 권한 설정
-//                    SecurityContextHolder.getContext()
-//                            .setAuthentication(usernamePasswordAuthenticationToken);
-//                }
-//            }
-//        }
-//
-//        filterChain.doFilter(request, response); //다음 필터로 넘김
-//    }
 
     @Override
     protected void doFilterInternal(final HttpServletRequest request,
@@ -66,14 +40,32 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         // 2. 토큰이 존재하고 유효한지 확인
         if (token != null && jwtUtil.isValidToken(token)) {
             Long userId = jwtUtil.getUserId(token);
-            // 3. 유저 정보 로드
-            UserDetails userDetails = customUserDetailsService.loadUserByUsername(userId.toString());
-            if (userDetails != null) {
-                // 4. Authentication 생성 및 등록
+
+            // case. 일반 로그인 유저
+            if (userId != 0L) {
+                // 3. 유저 정보 로드
+                UserDetails userDetails = customUserDetailsService.loadUserByUsername(userId.toString());
+                if (userDetails != null) {
+                    // 4. Authentication 생성 및 등록
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            } else { // case. 메타마스크 로그인 유저
+                String address = jwtUtil.getEmail(token); // 토큰에서 address(이메일)를 꺼내는 메서드
+                CustomUserInfoDto metamaskUser = new CustomUserInfoDto();
+                metamaskUser.setId(0L);
+                metamaskUser.setEmail(address);
+//                metamaskUser.setNickname("사용자_" + address.substring(2, 6)); // 예: 사용자_b677
+                metamaskUser.setNickname(address);
+                metamaskUser.setRole(Role.CUSTOMER);
+
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(metamaskUser, null,
+                                List.of(new SimpleGrantedAuthority(metamaskUser.getRole().name())));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+
         }
 
         // 5. 다음 필터로 넘기기

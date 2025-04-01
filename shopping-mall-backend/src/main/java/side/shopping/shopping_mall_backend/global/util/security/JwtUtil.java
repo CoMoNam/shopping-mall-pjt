@@ -76,6 +76,42 @@ public class JwtUtil {
     }
 
     /**
+     *
+     * metamask jwt create
+     */
+
+    public ResponseEntity<Void> createMetamaskToken(String address) {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attributes == null) {
+            throw new IllegalStateException("현재 요청 컨텍스트를 가져올 수 없습니다.");
+        }
+
+        HttpServletResponse response = attributes.getResponse();
+        if (response == null) {
+            throw new IllegalStateException("현재 응답 객체를 가져올 수 없습니다.");
+        }
+
+        CustomUserInfoDto customUserInfoDto = new CustomUserInfoDto();
+        customUserInfoDto.setId(0L);
+        customUserInfoDto.setEmail(address);
+        customUserInfoDto.setNickname(address);
+        customUserInfoDto.setRole(Role.CUSTOMER);
+
+        String jwtToken = createToken(customUserInfoDto, accessTokenExpTime);
+
+        ResponseCookie cookie = ResponseCookie.from("jwt", jwtToken)
+                .httpOnly(true)
+                .secure(secure)
+                .sameSite(sameSite)
+                .path("/")
+                .maxAge(accessTokenExpTime)
+                .build();
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+
+        return ResponseEntity.ok().build();
+    }
+
+    /**
      * JWT 생성
      *
      * @return JWT String

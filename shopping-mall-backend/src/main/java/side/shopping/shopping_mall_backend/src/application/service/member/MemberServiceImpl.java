@@ -73,6 +73,11 @@ public class MemberServiceImpl implements MemberService{
         return jwtUtil.createAccessToken(customUserInfoDto);
     }
 
+    @Override
+    public ResponseEntity<Void> walletLogin(String address) {
+        return jwtUtil.createMetamaskToken(address);
+    }
+
     // email 중복 검증
     public boolean isEmailDuplicate(String email) {
         return memberRepository.findByEmail(email).isPresent();

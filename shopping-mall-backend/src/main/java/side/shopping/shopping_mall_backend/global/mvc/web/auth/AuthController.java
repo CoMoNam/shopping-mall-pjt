@@ -1,6 +1,7 @@
 package side.shopping.shopping_mall_backend.global.mvc.web.auth;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,9 @@ import side.shopping.shopping_mall_backend.global.mvc.domain.auth.JwtRequestInfo
 import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.mvc.service.auth.AuthService;
 import side.shopping.shopping_mall_backend.global.enums.EndPoint;
+
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = EndPoint.AUTH_CONTROLLER)
@@ -40,35 +44,4 @@ public class AuthController {
 
         return ResponseEntity.ok(Comments.TRANSACTION_SUCCESS.getDescriptionEn());
     }
-
-//    @GetMapping(value = "/get_token")
-//    public ResponseEntity<?> getToken(@CookieValue(name = "jwt", required = false) String token) {
-//        System.out.println("=====>> 진입::1");
-//        System.out.println(token);
-//        System.out.println("=====>> 진입::2");
-//        if (token == null || !authService.validateToken(token)) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        }
-//        return ResponseEntity.ok(authService.getToken(token));
-//    }
-
-//    @GetMapping("/get_token")
-//    public ResponseEntity<?> getToken(@RequestHeader("Cookie") String cookieHeader) {
-//        System.out.println("=====>> Request Header - Cookie: " + cookieHeader);
-//
-//        // 쿠키에서 jwt를 추출
-//        String jwt = Arrays.stream(cookieHeader.split(";"))
-//                .map(String::trim)
-//                .filter(cookie -> cookie.startsWith("jwt="))
-//                .map(cookie -> cookie.substring("jwt=".length()))
-//                .findFirst()
-//                .orElse(null);
-//
-//        System.out.println("JWT from Cookie: " + jwt);
-//
-//        if (jwt == null || !authService.validateToken(jwt)) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        }
-//        return ResponseEntity.ok(authService.getToken(jwt));
-//    }
 }
