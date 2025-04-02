@@ -14,9 +14,6 @@ app.post("/api/verify", async (req, res) => {
   try {
     const recovered = ethers.verifyMessage(message, signature);
 
-    console.log("✅ Recovered Address:", recovered);
-    console.log("✅ Claimed Address:  ", address);
-
     if (recovered.toLowerCase() === address.toLowerCase()) {
       return res.json({ valid: true, recovered });
     } else {

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.enums.EndPoint;
+import side.shopping.shopping_mall_backend.src.application.dto.product.ProductDetailDto;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductUpdateDto;
 import side.shopping.shopping_mall_backend.src.application.service.product.ProductService;
 import side.shopping.shopping_mall_backend.src.domain.product.Product;
@@ -47,6 +48,11 @@ public class ProductController {
     public ResponseEntity<String> update(@Valid @RequestBody ProductUpdateDto productUpdateDto) {
         productService.update(productUpdateDto);
         return ResponseEntity.ok(Comments.TRANSACTION_SUCCESS.getDescriptionEn());
+    }
+
+    @GetMapping(value = "/{id}")
+    public ProductDetailDto getProductDetail(@PathVariable Long id) {
+        return productService.getProductDetail(id);
     }
 
 }

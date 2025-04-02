@@ -22,11 +22,13 @@ services:
 
   # <<< elk 검색 엔진 >>> local, dev 환경으로 보안 해제 구성
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    build:
+      context: .           # Dockerfile 있는 디렉토리 기준 (보통 현재 디렉토리)
+      dockerfile: Dockerfile
     container_name: sm-elasticsearch
     environment:
       - discovery.type=single-node
-      - xpack.security.enabled=false  # 보안 비활성화 (로그인 없음)
+      - xpack.security.enabled=false
       - xpack.security.transport.ssl.enabled=false
       - xpack.security.http.ssl.enabled=false
       - bootstrap.memory_lock=true
@@ -39,8 +41,8 @@ services:
       - "9200:9200"
     volumes:
       - esdata:/usr/share/elasticsearch/data
-    command: >
-      bash -c "elasticsearch-plugin install analysis-nori && elasticsearch"
+#    command: >
+#      bash -c "elasticsearch-plugin install analysis-nori && elasticsearch"
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.11.1
@@ -55,12 +57,3 @@ services:
 
 volumes:
   esdata:
-
-  # <<< solr 검색 엔진 >>>
-  #  solr:
-  #    image: solr:latest
-  #    container_name: sm-solr
-  #    ports:
-  #      - "8983:8983"
-  #    volumes:
-  #      - ./solr_data:/opt/solr/server/solr/mycore/data  # Solr 데이터를 저장할 볼륨 마운트

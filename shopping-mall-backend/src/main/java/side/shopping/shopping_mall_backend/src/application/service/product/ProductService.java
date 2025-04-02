@@ -2,6 +2,7 @@ package side.shopping.shopping_mall_backend.src.application.service.product;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import side.shopping.shopping_mall_backend.src.application.dto.product.ProductDetailDto;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductUpdateDto;
 import side.shopping.shopping_mall_backend.src.domain.product.Product;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSaveDto;
@@ -16,5 +17,6 @@ public interface ProductService {
     Page<Product> getProductList(String name, Pageable pageable);
     void delete(Long id);
     void update(ProductUpdateDto productUpdateDto);
+    ProductDetailDto getProductDetail(Long id);
 
 }

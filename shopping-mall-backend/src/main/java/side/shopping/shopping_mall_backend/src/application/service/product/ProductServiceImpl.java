@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import side.shopping.shopping_mall_backend.global.enums.Comments;
 import side.shopping.shopping_mall_backend.global.util.security.LoginUserUtil;
+import side.shopping.shopping_mall_backend.src.application.dto.product.ProductDetailDto;
 import side.shopping.shopping_mall_backend.src.application.dto.product.ProductUpdateDto;
 import side.shopping.shopping_mall_backend.src.application.mapper.product.ProductMapper;
 import side.shopping.shopping_mall_backend.src.domain.elasticsearch.product.ProductElkDocument;
@@ -16,6 +17,7 @@ import side.shopping.shopping_mall_backend.src.application.dto.product.ProductSa
 import side.shopping.shopping_mall_backend.src.infrastructure.persistence.product.ProductRepository;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -87,6 +89,12 @@ public class ProductServiceImpl implements ProductService{
             throw new RuntimeException(Comments.TRANSACTION_FAIL.getDescriptionEn(), e);
         }
 
+    }
+
+    @Override
+    public ProductDetailDto getProductDetail(Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        return ProductMapper.INSTANCE.toProductDetailDto(product);
     }
 
     //평점 계산

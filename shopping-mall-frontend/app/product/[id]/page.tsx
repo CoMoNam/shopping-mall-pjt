@@ -1,3 +1,9 @@
+import ProductDetailPage from "@/components/product/ProductDetailPage";
+
 export default function ProductDetail() {
-  return <>Product 상세페이지</>;
+  return (
+    <>
+      <ProductDetailPage />
+    </>
+  );
 }

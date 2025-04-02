@@ -1,4 +1,4 @@
-import { apiClient, apiSsr } from "@/util/AxiosUtil";
+import { apiClient, apiSsrClient } from "@/util/AxiosUtil";
 
 export class SearchRepository {
   private baseUrl = "/api/elk/product";
@@ -9,7 +9,7 @@ export class SearchRepository {
     searchText: string,
     page: number
   ) => {
-    return await apiSsr(cookie)
+    return await apiSsrClient(cookie)
       .get(`${this.baseUrl}`, {
         params: {
           searchText,
