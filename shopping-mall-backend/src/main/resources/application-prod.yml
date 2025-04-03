@@ -21,4 +21,3 @@ elasticsearch:
 cors:
   allowed-origins:
     - https://side-mall.store
-    - http://sm-nextjs:3000
