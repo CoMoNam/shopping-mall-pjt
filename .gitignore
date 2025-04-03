@@ -50,7 +50,7 @@ build/
 # 🔐 Env Files
 # -----------------------------
 .env
-.env.prod
+.env.secret
 
 # -----------------------------
 # ☕ Spring Boot / Java
