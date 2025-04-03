@@ -61,7 +61,7 @@ const Login = () => {
             color: "inherit", // Typography 색상 상속
           }}
         >
-          SIDEMALL3
+          SIDEMALL4
         </span>
       </Typography>
       <Paper
