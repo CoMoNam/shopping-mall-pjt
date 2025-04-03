@@ -223,7 +223,7 @@ const Login = () => {
 
                   // spring server 에 메시지 요청
                   const messageResponse = await apiNodeClient.post(
-                    "/api/message",
+                    "/web3/message",
                     {
                       address: walletAddress,
                     }
@@ -237,7 +237,7 @@ const Login = () => {
                   const signature = await signer.signMessage(message);
 
                   const verifySignature = await apiNodeClient.post(
-                    "/api/verify",
+                    "/web3/verify",
                     {
                       address: walletAddress,
                       message: message,

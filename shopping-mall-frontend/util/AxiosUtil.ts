@@ -23,7 +23,7 @@ export const apiSsrClient = (cookie: string) => {
 
 // csr -> express call
 export const apiNodeClient = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: process.env.NEXT_PUBLIC_NODE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

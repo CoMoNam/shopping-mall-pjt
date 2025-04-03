@@ -1,7 +1,7 @@
 services:
   # MySQL 데이터베이스
-  db:
-    image: mysql:8.0
+  mysql:
+    image: mysql:8.0.28
     container_name: sm-mysql
     restart: always
     environment:
@@ -77,5 +77,19 @@ services:
     env_file:
       - ../../shopping-mall-frontend/.env.prod
 
+  # node.js express
+  nodejs:
+    container_name: sm-nodejs
+    build:
+      context: ../../shopping-mall-node-backend
+      dockerfile: Dockerfile
+    image: sm-node-img
+    ports:
+      - "4000:4000"  # 컨테이너 내부 포트 기준 (서버가 4000에서 실행되는 경우)
+    restart: always
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ../../shopping-mall-node-backend/.env.prod
 volumes:
   esdata:

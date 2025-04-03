@@ -1,0 +1,19 @@
+# 의존성 디렉토리
+node_modules
+npm-debug.log
+
+# OS/IDE
+.DS_Store
+.vscode
+.idea
+
+# Git 관련
+.git
+.gitignore
+
+# 빌드 도구 설정파일
+Dockerfile
+.dockerignore
+
+# 환경변수 파일
+.env*

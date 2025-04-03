@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // 서명 검증
-app.post("/api/verify", async (req, res) => {
+app.post("/web3/verify", async (req, res) => {
   const { message, signature, address } = req.body;
 
   try {
@@ -26,7 +26,7 @@ app.post("/api/verify", async (req, res) => {
 });
 
 // 로그인 메시지 생성
-app.post("/api/message", (req, res) => {
+app.post("/web3/message", (req, res) => {
   const { address } = req.body;
   if (!address) {
     return res.status(400).json({ error: "address is required" });
