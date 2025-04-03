@@ -55,5 +55,27 @@ services:
     depends_on:
       - elasticsearch
 
+  springboot:
+    container_name: sm-spring
+    build:
+      context: ../springboot-backend
+      dockerfile: Dockerfile
+    image: sm-spring-img
+    ports:
+      - "8080:8080"
+    restart: always
+
+  next-js:
+    container_name: sm-nextjs
+    build:
+      context: ../nextjs-frontend
+      dockerfile: Dockerfile
+    image: sm-next-img
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      - NODE_ENV=production
+
 volumes:
   esdata:
