@@ -1,0 +1,23 @@
+# Gradle 캐시 및 빌드 디렉토리
+.gradle/
+build/
+!build/libs/side-mall.jar
+
+# 로그 파일
+*.log
+
+# OS/에디터 관련 파일
+.DS_Store
+*.iml
+.idea/
+.vscode/
+
+# 환경 변수 파일
+.env
+.env.*
+
+# 기타 불필요한 파일
+*.swp
+
+out
+*.iml

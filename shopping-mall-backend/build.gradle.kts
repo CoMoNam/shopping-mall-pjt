@@ -46,8 +46,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	implementation("org.apache.commons:commons-pool2")
 
-	implementation("org.web3j:core:4.9.8")
-
 
 	compileOnly("org.projectlombok:lombok")
 
@@ -69,6 +67,7 @@ tasks.jar {
 
 tasks.bootJar {
 	archiveFileName.set("side-mall.jar")
+	destinationDirectory.set(file("$buildDir/libs"))
 }
 
 tasks.withType<Test> {

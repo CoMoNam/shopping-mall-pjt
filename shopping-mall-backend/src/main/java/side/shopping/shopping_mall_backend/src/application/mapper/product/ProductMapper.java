@@ -14,10 +14,13 @@ public interface ProductMapper {
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
     @Mappings({
+            @Mapping(target = "id", ignore = true),
             @Mapping(source = "name", target = "name"),
             @Mapping(source = "description", target = "description"),
             @Mapping(source = "price", target = "price"),
             @Mapping(source = "quantity", target = "quantity"),
+            @Mapping(target = "totalScore", ignore = true),
+            @Mapping(target = "reviewCnt", ignore = true),
             @Mapping(source = "categoryName", target = "categoryName")
     })
     Product toProduct(ProductSaveDto productSaveDto);
