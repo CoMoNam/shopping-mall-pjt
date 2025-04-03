@@ -1,0 +1,26 @@
+name: Deploy Frontend
+
+on:
+  push:
+    paths:
+      - 'shopping-mall-frontend/**'
+      - '.github/workflows/deploy-frontend.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: SSH to VPS and deploy Frontend
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_KEY }}
+          script: |
+            cd ~/side-mall
+            git pull origin main
+            docker compose build sm-nextjs
+            docker compose up -d sm-nextjs
+
