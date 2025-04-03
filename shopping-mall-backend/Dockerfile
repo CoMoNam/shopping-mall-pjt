@@ -7,6 +7,6 @@ COPY . .
 RUN ./gradlew build -x test --no-daemon
 
 ARG JAR_FILE=build/libs/*.jar
-COPY ${JAR_FILE} side-mall.jar
+COPY build/libs/side-mall.jar side-mall.jar
 
 ENTRYPOINT ["java", "-jar", "side-mall.jar"]
