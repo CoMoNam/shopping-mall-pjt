@@ -41,7 +41,7 @@ coverage/
 # -----------------------------
 # ⚙️ Next.js Build Outputs
 # -----------------------------
-.next/
+#.next/
 out/
 dist/
 build/
