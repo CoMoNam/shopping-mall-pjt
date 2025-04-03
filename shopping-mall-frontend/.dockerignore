@@ -6,9 +6,9 @@ pnpm-lock.yaml
 
 # Next.js 빌드 결과
 #.next
-.next/cache
-.next/static/development
-.next/trace
+#.next/cache
+#.next/static/development
+#.next/trace
 out
 dist
 build
