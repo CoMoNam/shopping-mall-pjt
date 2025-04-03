@@ -7,8 +7,8 @@ on:
     paths:
       - 'shopping-mall-frontend/**'
      # - '.github/workflows/deploy-frontend.yml'
-    paths-ignore:
-      - '**.md'
+    #paths-ignore:
+    #  - '**.md'
 
 jobs:
   deploy:
