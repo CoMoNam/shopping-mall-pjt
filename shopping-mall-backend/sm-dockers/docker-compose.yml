@@ -74,8 +74,8 @@ services:
     ports:
       - "3000:3000"
     restart: always
-    environment:
-      - NODE_ENV=production
+    env_file:
+      - ../../shopping-mall-frontend/.env.prod
 
 volumes:
   esdata:
