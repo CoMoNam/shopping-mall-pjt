@@ -25,5 +25,5 @@ jobs:
           script: |
             cd ~/side-mall
             git pull origin main
-            docker-compose build sm-nodejs
-            docker-compose up -d sm-nodejs
+            docker-compose build nodejs
+            docker-compose up -d nodejs

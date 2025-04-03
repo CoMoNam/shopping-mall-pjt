@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'shopping-mall-frontend/**'
+    #paths:
+      #- 'shopping-mall-frontend/**'
      # - '.github/workflows/deploy-frontend.yml'
     #paths-ignore:
     #  - '**.md'
@@ -25,6 +25,6 @@ jobs:
           script: |
             cd ~/side-mall
             git pull origin main
-            docker-compose build sm-nextjs
-            docker-compose up -d sm-nextjs
+            docker-compose build nextjs
+            docker-compose up -d nextjs
 

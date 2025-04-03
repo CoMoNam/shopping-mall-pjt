@@ -1,1 +1,1 @@
-ci/cd flow test trigger 2
+ci/cd flow test trigger front
