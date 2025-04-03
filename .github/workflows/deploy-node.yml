@@ -2,6 +2,8 @@ name: Deploy Node.js Backend
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'shopping-mall-node-backend/**'
       - '.github/workflows/deploy-node.yml'

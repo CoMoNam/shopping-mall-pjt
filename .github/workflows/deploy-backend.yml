@@ -2,6 +2,8 @@ name: Deploy Spring Boot Backend
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'shopping-mall-backend/**'
       - '.github/workflows/deploy-backend.yml'
