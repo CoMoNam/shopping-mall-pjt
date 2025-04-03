@@ -1,5 +1,5 @@
 services:
-  # <<< mysql db 컨테이너 >>>
+  # MySQL 데이터베이스
   db:
     image: mysql:8.0
     container_name: sm-mysql
@@ -11,19 +11,18 @@ services:
       MYSQL_PASSWORD: User12345!@
     ports:
       - "3304:3306"
-  # 호스트에서 3304 로 접근 -> 컨테이너 내부의 3306 포트로 전달
 
-  # <<< redis 세션 >>>
+  # Redis 캐시
   redis:
     image: redis
     container_name: sm-redis
     ports:
       - "6379:6379"
 
-  # <<< elk 검색 엔진 >>> local, dev 환경으로 보안 해제 구성
+  # Elasticsearch
   elasticsearch:
     build:
-      context: .           # Dockerfile 있는 디렉토리 기준 (보통 현재 디렉토리)
+      context: .  # 현재 디렉토리 (여기 sm-dockers에 Dockerfile 있음)
       dockerfile: Dockerfile
     container_name: sm-elasticsearch
     environment:
@@ -41,9 +40,8 @@ services:
       - "9200:9200"
     volumes:
       - esdata:/usr/share/elasticsearch/data
-#    command: >
-#      bash -c "elasticsearch-plugin install analysis-nori && elasticsearch"
 
+  # Kibana
   kibana:
     image: docker.elastic.co/kibana/kibana:8.11.1
     container_name: sm-kibana
@@ -55,6 +53,7 @@ services:
     depends_on:
       - elasticsearch
 
+  # Spring Boot 백엔드
   springboot:
     container_name: sm-spring
     build:
@@ -65,6 +64,7 @@ services:
       - "8080:8080"
     restart: always
 
+  # Next.js 프론트엔드
   next-js:
     container_name: sm-nextjs
     build:
