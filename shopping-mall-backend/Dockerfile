@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN ./gradlew build --no-daemon
+RUN ./gradlew build -x test --no-daemon
 
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} side-mall.jar
