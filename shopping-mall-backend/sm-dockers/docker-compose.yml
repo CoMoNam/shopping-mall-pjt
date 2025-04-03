@@ -68,7 +68,7 @@ services:
   nextjs:
     container_name: sm-nextjs
     build:
-      context: ../../../shopping-mall-frontend
+      context: ../../../../shopping-mall-frontend
       dockerfile: Dockerfile
     image: sm-next-img
     ports:
