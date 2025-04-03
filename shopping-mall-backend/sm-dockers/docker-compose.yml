@@ -57,7 +57,7 @@ services:
   springboot:
     container_name: sm-spring
     build:
-      context: ../
+      context: ../shopping-mall-backend
       dockerfile: Dockerfile
     image: sm-spring-img
     ports:

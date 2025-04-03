@@ -21,6 +21,8 @@ public interface ProductMapper {
             @Mapping(source = "quantity", target = "quantity"),
             @Mapping(target = "totalScore", ignore = true),
             @Mapping(target = "reviewCnt", ignore = true),
+            @Mapping(target = "rating", ignore = true),
+            @Mapping(target = "sellerId", ignore = true),
             @Mapping(source = "categoryName", target = "categoryName")
     })
     Product toProduct(ProductSaveDto productSaveDto);
