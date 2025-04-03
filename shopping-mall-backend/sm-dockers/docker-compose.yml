@@ -57,7 +57,7 @@ services:
   springboot:
     container_name: sm-spring
     build:
-      context: ../springboot-backend
+      context: ../../springboot-backend
       dockerfile: Dockerfile
     image: sm-spring-img
     ports:
@@ -65,10 +65,10 @@ services:
     restart: always
 
   # Next.js 프론트엔드
-  next-js:
+  nextjs:
     container_name: sm-nextjs
     build:
-      context: ../nextjs-frontend
+      context: ../../nextjs-frontend
       dockerfile: Dockerfile
     image: sm-next-img
     ports:
