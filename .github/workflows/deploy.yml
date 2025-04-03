@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 30
     steps:
       - name: SSH to VPS and deploy
         uses: appleboy/ssh-action@master
@@ -21,4 +21,3 @@ jobs:
             git pull origin main
             docker-compose down
             docker-compose up -d --build
-	timeout-minutes: 20
