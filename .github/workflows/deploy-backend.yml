@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'shopping-mall-backend/**'
-      - '.github/workflows/deploy-backend.yml'
+     # - '.github/workflows/deploy-backend.yml'
 
 jobs:
   deploy:
@@ -23,6 +23,6 @@ jobs:
           script: |
             cd ~/side-mall
             git pull origin main
-            docker compose build sm-spring
-            docker compose up -d sm-spring
+            docker-compose build sm-spring
+            docker-compose up -d sm-spring
 

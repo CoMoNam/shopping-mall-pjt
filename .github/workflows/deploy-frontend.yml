@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'shopping-mall-frontend/**'
-      - '.github/workflows/deploy-frontend.yml'
+     # - '.github/workflows/deploy-frontend.yml'
 
 jobs:
   deploy:
@@ -23,6 +23,6 @@ jobs:
           script: |
             cd ~/side-mall
             git pull origin main
-            docker compose build sm-nextjs
-            docker compose up -d sm-nextjs
+            docker-compose build sm-nextjs
+            docker-compose up -d sm-nextjs
 
