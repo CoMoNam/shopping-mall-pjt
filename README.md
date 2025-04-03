@@ -1,4 +1,4 @@
-# 🛒 Web2 쇼핑몰 시스템 (Next.js + Spring Boot)
+# 🛒 쇼핑몰 시스템 (Next.js + Spring Boot)
 
 Next.js(App Router)와 Spring Boot 기반의 쇼핑몰 플랫폼입니다.  
 JWT 기반 인증, 상품 관리, 검색 기능(Elasticsearch), 판매자 페이지 등 실무에 가까운 구조로 구현했습니다.

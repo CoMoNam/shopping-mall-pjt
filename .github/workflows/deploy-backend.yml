@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'shopping-mall-backend/**'
+    #paths:
+      #- 'shopping-mall-backend/**'
      # - '.github/workflows/deploy-backend.yml'
     #paths-ignore:
     #  - '**.md'
