@@ -57,7 +57,7 @@ services:
   springboot:
     container_name: sm-spring
     build:
-      context: ../../springboot-backend
+      context: ../
       dockerfile: Dockerfile
     image: sm-spring-img
     ports:
@@ -68,7 +68,7 @@ services:
   nextjs:
     container_name: sm-nextjs
     build:
-      context: ../../nextjs-frontend
+      context: ../../../shopping-mall-frontend
       dockerfile: Dockerfile
     image: sm-next-img
     ports:
