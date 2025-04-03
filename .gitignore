@@ -1,23 +1,53 @@
+# -----------------------------
+# 📦 Node.js Dependencies
+# -----------------------------
+shopping-mall-frontend/node_modules/
+shopping-mall-node-backend/node_modules/
+
+# -----------------------------
+# ⚙️ Next.js Build Outputs
+# -----------------------------
+shopping-mall-frontend/.next/
+shopping-mall-frontend/out/
+shopping-mall-frontend/dist/
+shopping-mall-frontend/build/
+
+# 🔍 특정 Next.js 내부 캐시 디렉토리 무시 (명시적으로)
+shopping-mall-frontend/.next/cache/
+shopping-mall-frontend/.next/static/development/
+shopping-mall-frontend/.next/trace
+
+# -----------------------------
+# 🔐 Env Files
+# -----------------------------
+**/.env
+**/.env.secret
+
+# -----------------------------
+# ☕ Spring Boot / Java
+# -----------------------------
+shopping-mall-backend/target/
+shopping-mall-backend/*.jar
+shopping-mall-backend/*.war
+shopping-mall-backend/*.class
+
+# -----------------------------
+# 💡 TypeScript
+# -----------------------------
+*.tsbuildinfo
+shopping-mall-frontend/next-env.d.ts
+
+# -----------------------------
+# 🐞 Debug / Logs
+# -----------------------------
+*.log
+npm-debug.log*
 
 # -----------------------------
 # 🧪 Test Outputs
 # -----------------------------
 test-output/
-jest.config.js
-jest.config.ts
-
-# -----------------------------
-# 🚀 GitHub Actions (보호 O)
-# -----------------------------
-# !.github/
-
-# -----------------------------
-# ⚙️ Docker / CI/CD
-# -----------------------------
-docker-compose.override.yml
-**/.env.docker
-**/Dockerfile.local
-**/docker-compose-dev.yml
+coverage/
 
 # -----------------------------
 # 🔑 SSH Keys (절대 커밋 금지)
@@ -28,57 +58,25 @@ id_rsa.pub
 *.crt
 
 # -----------------------------
-# 📦 Node.js Dependencies
+# ⚙️ Docker / CI/CD
 # -----------------------------
-node_modules/
-**/node_modules/
+**/docker-compose.override.yml
+**/.env.docker
+**/Dockerfile.local
+**/docker-compose-dev.yml
 
 # -----------------------------
-# 🔍 Testing / Coverage
+# 🛠 GitHub Actions
 # -----------------------------
-coverage/
-
-# -----------------------------
-# ⚙️ Next.js Build Outputs
-# -----------------------------
-#.next/
-.next/cache/
-out/
-dist/
-build/
-
-# -----------------------------
-# 🔐 Env Files
-# -----------------------------
-.env
-.env.secret
-
-# -----------------------------
-# ☕ Spring Boot / Java
-# -----------------------------
-target/
-**/target/
-*.jar
-*.war
-*.class
-
-# -----------------------------
-# 💡 TypeScript
-# -----------------------------
-*.tsbuildinfo
-next-env.d.ts
-
-# -----------------------------
-# 🐞 Debug / Logs
-# -----------------------------
-npm-debug.log*
-*.log
+# (디폴트는 보호, 주석 제거 시 제외되지 않음)
+# !.github/
 
 # -----------------------------
 # 💻 OS / Misc
 # -----------------------------
 .DS_Store
 Thumbs.db
+*.swp
 *.pem
 
 # -----------------------------
@@ -89,6 +87,7 @@ Thumbs.db
 *.iml
 
 # -----------------------------
-# ▲ Vercel (if deployed there)
+# ▲ Vercel
 # -----------------------------
-.vercel/
+shopping-mall-frontend/.vercel/
+
