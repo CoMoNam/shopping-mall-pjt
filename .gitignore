@@ -1,5 +1,33 @@
 
 # -----------------------------
+# 🧪 Test Outputs
+# -----------------------------
+test-output/
+jest.config.js
+jest.config.ts
+
+# -----------------------------
+# 🚀 GitHub Actions (보호 O)
+# -----------------------------
+# !.github/
+
+# -----------------------------
+# ⚙️ Docker / CI/CD
+# -----------------------------
+docker-compose.override.yml
+**/.env.docker
+**/Dockerfile.local
+**/docker-compose-dev.yml
+
+# -----------------------------
+# 🔑 SSH Keys (절대 커밋 금지)
+# -----------------------------
+id_rsa
+id_rsa.pub
+*.key
+*.crt
+
+# -----------------------------
 # 📦 Node.js Dependencies
 # -----------------------------
 node_modules/
