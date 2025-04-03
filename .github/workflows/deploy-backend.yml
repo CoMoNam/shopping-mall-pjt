@@ -25,6 +25,6 @@ jobs:
           script: |
             cd ~/side-mall/shopping-mall-backend/sm-dockers
             git pull origin main
-            docker-compose build sm-spring
-            docker-compose up -d sm-spring
+            docker-compose build springboot
+            docker-compose up -d springboot
 
