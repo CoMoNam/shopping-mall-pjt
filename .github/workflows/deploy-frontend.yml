@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'shopping-mall-frontend/**'
+      - 'shopping-mall-frontend/.next/**'
      # - '.github/workflows/deploy-frontend.yml'
     #paths-ignore:
     #  - '**.md'
