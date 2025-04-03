@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://sm-mysql:3304/SMDB
+    username: smuser
+    password: User12345!@
+  data:
+    redis:
+      host: sm-redis
+      port: 6379
+
+cookie:
+  secure: true
+  sameSite: "None"
+
+elasticsearch:
+  hostname: sm-elasticsearch
+  port: 9200
+  schema: "http"
+
+cors:
+  allowed-origins:
+    - https://side-mall.store
+    - http://sm-nextjs:3000

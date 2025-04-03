@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: shopping-mall
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3304/SMDB
@@ -11,11 +13,18 @@ spring:
     redis:
       host: localhost
       port: 6379
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true                             # 실행되는 SQL을 출력
+    properties:
+      hibernate:
+        format_sql: true                       # SQL을 보기 좋게 포맷
+    open-in-view: false
 
 jwt:
   secret-key: "c3RhY2t5c3RyYW5nZ2VvZnJlZW5rZXl0aGVyZXNlY3JldGVzYXJvd3Bpb25sb3diYXNlZGtleQ"
   expiration-time: 86400000 # 1일 동안 유효
-
 cookie:
   secure: false
   sameSite: "Lax"
@@ -31,3 +40,7 @@ elasticsearch:
   hostname: "localhost"
   port: 9200
   schema: "http"
+
+cors:
+  allowed-origins:
+    - http://localhost:3000

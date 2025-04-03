@@ -16,6 +16,7 @@ import side.shopping.shopping_mall_backend.global.enums.EndPoint;
 import side.shopping.shopping_mall_backend.global.filter.security.JwtAuthFilter;
 import side.shopping.shopping_mall_backend.global.handler.security.CustomAccessDeniedHandler;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
+import side.shopping.shopping_mall_backend.global.ymlconf.CorsYmlConf;
 import side.shopping.shopping_mall_backend.src.application.service.security.CustomUserDetailsService;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class SecurityConfig {
     private final JwtUtil jwtUtil;
     private final CustomAccessDeniedHandler accessDeniedHandler;
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+    private final CorsYmlConf corsYmlConf;
 
     private static final String[] AUTH_WHITELIST = {
             EndPoint.MEMBER_CONTROLLER + "/join",
@@ -48,7 +50,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
             .cors(cors -> cors.configurationSource(request -> {
                 var corsConfiguration = new CorsConfiguration();
-                corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+                corsConfiguration.setAllowedOrigins(corsYmlConf.getAllowedOrigins());
                 corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
                 corsConfiguration.setAllowedHeaders(List.of("*"));
                 corsConfiguration.setAllowCredentials(true); // 쿠키허용

@@ -12,4 +12,4 @@ RUN ./gradlew bootJar -x test --no-daemon
 FROM eclipse-temurin:21-jdk
 WORKDIR /app
 COPY --from=builder /app/build/libs/side-mall.jar side-mall.jar
-ENTRYPOINT ["java", "-jar", "side-mall.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "side-mall.jar"]
