@@ -7,7 +7,7 @@ shopping-mall-node-backend/node_modules/
 # -----------------------------
 # ⚙️ Next.js Build Outputs
 # -----------------------------
-shopping-mall-frontend/.next/
+#shopping-mall-frontend/.next/
 shopping-mall-frontend/out/
 shopping-mall-frontend/dist/
 shopping-mall-frontend/build/
