@@ -1,12 +1,12 @@
-name: Deploy Frontend
+name: Deploy Next.js Fackend
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'shopping-mall-frontend/.next/**'
-     # - '.github/workflows/deploy-frontend.yml'
+      - 'shopping-mall-frontend/**'
+     # - '.github/workflows/deploy-node.yml'
     #paths-ignore:
     #  - '**.md'
 
@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      - name: SSH to VPS and deploy Frontend
+      - name: SSH to VPS and deploy Node.js
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -27,4 +27,3 @@ jobs:
             git pull origin main
             docker-compose build nextjs
             docker-compose up -d nextjs
-

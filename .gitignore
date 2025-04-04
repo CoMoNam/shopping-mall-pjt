@@ -12,6 +12,7 @@ shopping-mall-frontend/dist/
 shopping-mall-frontend/build/
 
 # 🔍 특정 Next.js 내부 캐시 디렉토리 무시 (명시적으로)
+shopping-mall-frontend/.next
 shopping-mall-frontend/.next/cache/
 shopping-mall-frontend/.next/static/development/
 shopping-mall-frontend/.next/trace
@@ -51,8 +52,8 @@ coverage/
 # -----------------------------
 # 🔑 SSH Keys (절대 커밋 금지)
 # -----------------------------
-id_rsa
-id_rsa.pub
+id_rsa_github
+id_rsa_github.pub
 *.key
 *.crt
 
