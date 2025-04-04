@@ -25,6 +25,6 @@ jobs:
           script: |
             cd ~/side-mall/shopping-mall-backend/sm-dockers
             git pull origin main
-            docker-compose build springboot
+            docker-compose build --no-cache springboot
             docker-compose up -d springboot
 
