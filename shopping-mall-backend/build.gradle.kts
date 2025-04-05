@@ -67,7 +67,7 @@ tasks.jar {
 
 tasks.bootJar {
 	archiveFileName.set("side-mall.jar")
-	destinationDirectory.set(file("$buildDir/libs"))
+//	destinationDirectory.set(file("$buildDir/libs"))
 }
 
 tasks.withType<Test> {

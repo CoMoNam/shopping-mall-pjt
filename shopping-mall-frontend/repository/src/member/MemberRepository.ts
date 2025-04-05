@@ -32,9 +32,12 @@ export class MemberRepository {
         if (axios.isAxiosError(error) && error.response) {
           if (Array.isArray(error.response.data)) {
             responseErrorData = error.response.data.join("<br>");
-          } else {
+          } else if (typeof error.response.data === "string") {
             responseErrorData = error.response.data;
+          } else {
+            responseErrorData = "알 수 없는 오류가 발생했습니다.";
           }
+
           Swal.fire({
             // position: "top-end",
             icon: "error",

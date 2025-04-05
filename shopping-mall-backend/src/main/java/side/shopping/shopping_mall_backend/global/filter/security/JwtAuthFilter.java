@@ -12,12 +12,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
+import side.shopping.shopping_mall_backend.global.configuration.security.SecurityWhiteList;
 import side.shopping.shopping_mall_backend.global.enums.Role;
 import side.shopping.shopping_mall_backend.global.util.security.JwtUtil;
 import side.shopping.shopping_mall_backend.src.application.dto.member.CustomUserInfoDto;
 import side.shopping.shopping_mall_backend.src.application.service.security.CustomUserDetailsService;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -34,6 +36,19 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(final HttpServletRequest request,
                                     final HttpServletResponse response,
                                     final FilterChain filterChain) throws ServletException, IOException {
+
+        String uri = request.getRequestURI();
+
+        System.out.println("Request URI ====>> " + uri);
+
+        // 화이트리스트 경로일 경우 필터 패스
+        for (String white : SecurityWhiteList.AUTH_WHITELIST) {
+            if (uri.startsWith(white)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+        }
+
         // 1. 쿠키에서 JWT 꺼내기
         String token = resolveTokenFromCookie(request);
 

@@ -35,14 +35,6 @@ public class SecurityConfig {
     private final CustomAuthenticationEntryPoint authenticationEntryPoint;
     private final CorsYmlConf corsYmlConf;
 
-    private static final String[] AUTH_WHITELIST = {
-            EndPoint.MEMBER_CONTROLLER + "/join",
-            EndPoint.MEMBER_CONTROLLER + "/login",
-            EndPoint.MEMBER_CONTROLLER + "/wallet-login",
-            EndPoint.AUTH_CONTROLLER + "/logout",
-            EndPoint.AUTH_CONTROLLER + "/get_token_info",
-    };
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -69,7 +61,7 @@ public class SecurityConfig {
                 authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler));
         //권한 규칙 작성
         http.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(AUTH_WHITELIST).permitAll()
+                .requestMatchers(SecurityWhiteList.AUTH_WHITELIST).permitAll()
                 //@PreAuthorization 사용 -> 모든 경로에 대한 인증처리는 Pass
                 .anyRequest().authenticated()
         );

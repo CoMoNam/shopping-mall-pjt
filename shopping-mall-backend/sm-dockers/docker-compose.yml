@@ -50,48 +50,50 @@ services:
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
       - XPACK_SECURITY_ENABLED=false
+      #- SERVER_BASEPATH=/kibana vps 배포시
+      #- SERVER_REWRITEBASEPATH=true vps 배포시
     depends_on:
       - elasticsearch
 
   # Spring Boot 백엔드
-  springboot:
-    container_name: sm-spring
-    build:
-      context: ../
-      dockerfile: Dockerfile
-    image: sm-spring-img
-    ports:
-      - "8080:8080"
-    restart: always
+#  springboot:
+#    container_name: sm-spring
+#    build:
+#      context: ../
+#      dockerfile: Dockerfile
+#    image: sm-spring-img
+#    ports:
+#      - "8080:8080"
+#    restart: always
 
   # Next.js 프론트엔드
-  nextjs:
-    container_name: sm-nextjs
-    build:
-      context: ../../shopping-mall-frontend
-      dockerfile: Dockerfile
-    image: sm-next-img
-    ports:
-      - "3000:3000"
-    restart: always
-    environment:
-      - NODE_ENV=production
-    env_file:
-      - ../../shopping-mall-frontend/.env.prod
+#  nextjs:
+#    container_name: sm-nextjs
+#    build:
+#      context: ../../shopping-mall-frontend
+#      dockerfile: Dockerfile
+#    image: sm-next-img
+#    ports:
+#      - "3000:3000"
+#    restart: always
+#    environment:
+#      - NODE_ENV=production
+#    env_file:
+#      - ../../shopping-mall-frontend/.env.prod
 
   # node.js express
-  nodejs:
-    container_name: sm-nodejs
-    build:
-      context: ../../shopping-mall-node-backend
-      dockerfile: Dockerfile
-    image: sm-node-img
-    ports:
-      - "4000:4000"  # 컨테이너 내부 포트 기준 (서버가 4000에서 실행되는 경우)
-    restart: always
-    environment:
-      - NODE_ENV=production
-    env_file:
-      - ../../shopping-mall-node-backend/.env.prod
+#  nodejs:
+#    container_name: sm-nodejs
+#    build:
+#      context: ../../shopping-mall-node-backend
+#      dockerfile: Dockerfile
+#    image: sm-node-img
+#    ports:
+#      - "4000:4000"  # 컨테이너 내부 포트 기준 (서버가 4000에서 실행되는 경우)
+#    restart: always
+#    environment:
+#      - NODE_ENV=production
+#    env_file:
+#      - ../../shopping-mall-node-backend/.env.prod
 volumes:
   esdata:

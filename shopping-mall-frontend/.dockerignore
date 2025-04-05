@@ -1,36 +1,36 @@
-#  개발 시 생성되는 디렉토리 무시
-node_modules
-.next/cache
-.next/static/development
-.next/trace
+# #  개발 시 생성되는 디렉토리 무시
+# node_modules
+# .next/cache
+# .next/static/development
+# .next/trace
 
-#  빌드 시 생성되는 파일 중, 로컬에서 처리된 것을 제외하면 포함 가능
-# 만약 .next 전체를 포함시키고 싶다면 위 3개만 제외하고 .next는 포함
+# #  빌드 시 생성되는 파일 중, 로컬에서 처리된 것을 제외하면 포함 가능
+# # 만약 .next 전체를 포함시키고 싶다면 위 3개만 제외하고 .next는 포함
 
-#  소스 관리 도구 및 IDE 설정
-.git
-.gitignore
-.vscode
-.idea
+# #  소스 관리 도구 및 IDE 설정
+# .git
+# .gitignore
+# .vscode
+# .idea
 
-#  로그 및 디버깅 관련
-npm-debug.log*
-*.log
+# #  로그 및 디버깅 관련
+# npm-debug.log*
+# *.log
 
-#  macOS / Windows 시스템 파일
-.DS_Store
-Thumbs.db
+# #  macOS / Windows 시스템 파일
+# .DS_Store
+# Thumbs.db
 
-#  테스트 및 커버리지
-coverage
-test-output
+# #  테스트 및 커버리지
+# coverage
+# test-output
 
-#  환경 파일 (이미 Dockerfile에 직접 넣는 경우)
-.env.local
-.env.development
-.env.test
-.env.production
+# #  환경 파일 (이미 Dockerfile에 직접 넣는 경우)
+# .env.local
+# .env.development
+# .env.test
+# .env.production
 
-#  기타 CI/CD 관련
-Dockerfile.local
-docker-compose.override.yml
+# #  기타 CI/CD 관련
+# Dockerfile.local
+# docker-compose.override.yml

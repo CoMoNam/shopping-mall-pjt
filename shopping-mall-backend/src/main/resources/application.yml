@@ -25,9 +25,6 @@ spring:
 jwt:
   secret-key: "c3RhY2t5c3RyYW5nZ2VvZnJlZW5rZXl0aGVyZXNlY3JldGVzYXJvd3Bpb25sb3diYXNlZGtleQ"
   expiration-time: 86400000 # 1일 동안 유효
-cookie:
-  secure: false
-  sameSite: "Lax"
 
 server:
   port: 8080
@@ -40,7 +37,3 @@ elasticsearch:
   hostname: "localhost"
   port: 9200
   schema: "http"
-
-cors:
-  allowed-origins:
-    - http://localhost:3000
