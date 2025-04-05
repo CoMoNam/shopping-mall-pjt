@@ -1,4 +1,7 @@
+// vps wating
+
 import axios from "axios";
+import { setIsGlobalLoading } from "@/lib/loadingGlobalSetter";
 
 // csr -> springboot call
 export const apiClient = axios.create({
@@ -28,3 +31,19 @@ export const apiNodeClient = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+apiClient.interceptors.request.use((config) => {
+  setIsGlobalLoading(true); // 로딩 시작
+  return config;
+});
+
+apiClient.interceptors.response.use(
+  (response) => {
+    setTimeout(() => setIsGlobalLoading(false), 300); // 잠시 후 로딩 끝
+    return response;
+  },
+  (error) => {
+    setTimeout(() => setIsGlobalLoading(false), 300);
+    return Promise.reject(error);
+  }
+);

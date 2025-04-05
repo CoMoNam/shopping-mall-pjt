@@ -1,8 +1,13 @@
+// vps wating
+
 import { Metadata } from "next";
 import "../styles/globals.css";
 import Footer from "@/components/Footer";
 import Providers from "@/components/Providers";
 import HeaderWrapper from "@/components/HeaderWrapper";
+import LoadingModal from "@/components/LoadingModal";
+import { LoadingProvider } from "@/components/LoadingContext";
+import PageLoadingHandler from "@/lib/PageLoadingHandler";
 
 export const metadata: Metadata = {
   title: "SIDEMALL",
@@ -19,7 +24,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="main-container">
           <Providers>
             <HeaderWrapper />
-            <main>{children}</main>
+            <LoadingProvider>
+              <PageLoadingHandler />
+              <main>{children}</main>
+              <LoadingModal />
+            </LoadingProvider>
             <Footer />
           </Providers>
         </div>

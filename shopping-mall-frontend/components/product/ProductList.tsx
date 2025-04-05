@@ -248,7 +248,7 @@ const ProductList = () => {
                       "&:hover img": {
                         transform: "scale(1.05)",
                       },
-                      height: "360px",
+                      height: "400px",
                     }}
                     onClick={() => handleProductClick(product)} // 제품 클릭 시 모달 띄우기
                   >
