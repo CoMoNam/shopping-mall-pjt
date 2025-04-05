@@ -229,7 +229,9 @@ const ProductList = () => {
                 marginRight: 5,
               }}
             >
-              찾는 중...
+              찾는 중... <br />
+              현재 서버는 테스트용 저사양 VPS에서 구동되고 있어, 페이지 로딩이
+              느릴 수 있습니다. 사용에 양해 부탁드립니다 🙏
             </Typography>
             <CircularProgress sx={{ color: "black" }} />
           </Box>
@@ -243,7 +245,10 @@ const ProductList = () => {
                       textAlign: "center",
                       cursor: "pointer",
                       transition: "all 0.3s ease-in-out",
-                      height: "390px",
+                      "&:hover img": {
+                        transform: "scale(1.05)",
+                      },
+                      height: "360px",
                     }}
                     onClick={() => handleProductClick(product)} // 제품 클릭 시 모달 띄우기
                   >

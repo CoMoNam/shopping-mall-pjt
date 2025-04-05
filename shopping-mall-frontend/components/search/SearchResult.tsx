@@ -6,6 +6,7 @@ import {
   Box,
   Card,
   CardContent,
+  CardMedia,
   CircularProgress,
   Grid,
   Rating,
@@ -136,7 +137,7 @@ const SearchResult = ({ searchValue }: Props) => {
                       },
                     }}
                   >
-                    <Box
+                    {/* <Box
                       sx={{
                         overflow: "hidden",
                         height: "200px",
@@ -163,7 +164,15 @@ const SearchResult = ({ searchValue }: Props) => {
                       }}
                     >
                       이미지 준비중
-                    </Box>
+                    </Box> */}
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={`https://picsum.photos/300/200?random=${Math.floor(
+                        Math.random() * 1000
+                      )}`}
+                      alt={product.name}
+                    />
                     <CardContent>
                       <Typography
                         variant="h6"

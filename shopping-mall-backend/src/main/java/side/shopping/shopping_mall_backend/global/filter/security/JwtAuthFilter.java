@@ -39,8 +39,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String uri = request.getRequestURI();
 
-        System.out.println("Request URI ====>> " + uri);
-
         // 화이트리스트 경로일 경우 필터 패스
         for (String white : SecurityWhiteList.AUTH_WHITELIST) {
             if (uri.startsWith(white)) {

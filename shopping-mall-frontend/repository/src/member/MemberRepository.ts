@@ -27,17 +27,14 @@ export class MemberRepository {
         return response.data; // 서버의 응답 데이터를 반환
       })
       .catch((error) => {
-        let responseErrorData = "";
+        let responseErrorData = "알 수 없는 오류가 발생했습니다.";
         // Axios 에러 처리
         if (axios.isAxiosError(error) && error.response) {
           if (Array.isArray(error.response.data)) {
             responseErrorData = error.response.data.join("<br>");
-          } else if (typeof error.response.data === "string") {
-            responseErrorData = error.response.data;
           } else {
-            responseErrorData = "알 수 없는 오류가 발생했습니다.";
+            responseErrorData = error.response.data;
           }
-
           Swal.fire({
             // position: "top-end",
             icon: "error",
@@ -62,7 +59,7 @@ export class MemberRepository {
         return response.data;
       })
       .catch((error) => {
-        let responseErrorData = "";
+        let responseErrorData = "알 수 없는 오류가 발생했습니다.";
 
         if (axios.isAxiosError(error) && error.response) {
           if (Array.isArray(error.response.data)) {
@@ -79,7 +76,7 @@ export class MemberRepository {
               title: "swal-error-title",
             },
           });
-          return error.response.data;
+          return responseErrorData;
         }
       });
   };
@@ -93,7 +90,7 @@ export class MemberRepository {
         return response.data;
       })
       .catch((error) => {
-        let responseErrorData = "";
+        let responseErrorData = "알 수 없는 오류가 발생했습니다.";
 
         if (axios.isAxiosError(error) && error.response) {
           if (Array.isArray(error.response.data)) {
@@ -110,7 +107,7 @@ export class MemberRepository {
               title: "swal-error-title",
             },
           });
-          return error.response.data;
+          return responseErrorData;
         }
       });
   };

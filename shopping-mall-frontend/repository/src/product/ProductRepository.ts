@@ -14,7 +14,7 @@ export class ProductRepository {
         return response.data; // 서버의 응답 데이터를 반환
       })
       .catch((error) => {
-        let responseErrorData = "";
+        let responseErrorData = "알 수 없는 오류가 발생했습니다.";
         if (axios.isAxiosError(error) && error.response) {
           if (Array.isArray(error.response.data)) {
             responseErrorData = error.response.data.join("<br>");
@@ -31,7 +31,7 @@ export class ProductRepository {
               title: "swal-error-title", // 커스텀 클래스 추가
             },
           });
-          return error.response.data;
+          return responseErrorData;
         }
       });
   };
@@ -62,7 +62,7 @@ export class ProductRepository {
         return response.data;
       })
       .catch((error) => {
-        let responseErrorData = "";
+        let responseErrorData = "알 수 없는 오류가 발생했습니다.";
         if (axios.isAxiosError(error) && error.response) {
           if (Array.isArray(error.response.data)) {
             responseErrorData = error.response.data.join("<br>");
@@ -78,7 +78,7 @@ export class ProductRepository {
               title: "swal-error-title",
             },
           });
-          return error.response.data;
+          return responseErrorData;
         }
       });
   };
